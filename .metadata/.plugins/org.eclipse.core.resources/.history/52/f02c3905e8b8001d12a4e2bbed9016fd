@@ -1,0 +1,9 @@
+package image;
+
+public class ImageModel {
+
+	public ImageModel() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
