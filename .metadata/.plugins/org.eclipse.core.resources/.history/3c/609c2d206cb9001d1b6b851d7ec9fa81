@@ -1,0 +1,53 @@
+package frames;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
+import base.comp.BaseFrame;
+import base.comp.imageLabel;
+import db.DbManager;
+
+public class MainFrame extends BaseFrame{
+
+	private DbManager db;
+	private JLabel jlImg;
+	private JComboBox jcTop;
+	private JButton jbLogin;
+	private JButton jbSignUp;
+
+	public MainFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("메인", 1000, 844);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlImg = new imageLabel("로그인 후 이용해주세요", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
+		jcTop = new JComboBox<>();
+		
+		jbLogin = new JButton("로그인");
+		jbSignUp = new JButton("회원가입");
+		jbLogin = new JButton("도서 목록");
+		jbLogin = new JButton("마이페이지");
+		jbLogin = new JButton("책 읽기");
+		jbLogin = new JButton("종료");
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.add(jlImg);
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

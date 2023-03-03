@@ -1,0 +1,86 @@
+package frames;
+
+import java.awt.Color;
+import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import base.comp.BaseFrame;
+import base.comp.imageLabel;
+import db.DbManager;
+
+public class MainFrame extends BaseFrame{
+
+	private DbManager db;
+	private JLabel jlImg;
+	private JComboBox jcTop;
+	private JButton jbLogin;
+	private JButton jbSignUp;
+	private JButton jbMyPage;
+	private JButton jbRead;
+	private JButton jbClose;
+	private JButton jbBookList;
+
+	public MainFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("메인", 1000, 844);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlImg = new imageLabel("로그인 후 이용해주세요", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
+		jcTop = new JComboBox<>();
+		
+		jbLogin = new JButton("로그인");
+		jbSignUp = new JButton("회원가입");
+		jbBookList = new JButton("도서 목록");
+		jbMyPage = new JButton("마이페이지");
+		jbRead = new JButton("책 읽기");
+		jbClose = new JButton("종료");
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.add(jlImg);
+		
+		jpCenter.setBorder(new TitledBorder(new LineBorder(Color.black), "인기 도서"));
+		jpCenter.addChild();
+		jpCenter.jpTop.setFlowLeft().add(jcTop);
+		
+		jpCenter.jpCenter.setGrid(1, 0, 10, 10);
+
+		Vector<Vector<String>> cols = db.getData("select d_name from 2023지방_2.division;");
+		
+		jcTop.addItem("전체");
+		
+		for (int i = 0; i < cols.size(); i++) {
+			jcTop.addItem(cols.get(i));
+		}
+		
+		jpBottom.setFlowCenter().add(jbLogin);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbBookList);
+		jpBottom.add(jbMyPage);
+		jpBottom.add(jbRead);
+		jpBottom.add(jbClose);
+		
+		
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

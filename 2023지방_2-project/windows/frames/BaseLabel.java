@@ -1,0 +1,22 @@
+package frames;
+
+import java.awt.Font;
+
+import javax.swing.JLabel;
+
+public class BaseLabel extends JLabel {
+
+	public BaseLabel(String title) {
+		// TODO Auto-generated constructor stub
+		super(title);
+	}
+	public BaseLabel setTitle(int size) {
+		super.setFont(new Font("HY헤드라인M", Font.PLAIN, size));
+		return this;
+	}
+	public BaseLabel setCenter() {
+		super.setHorizontalAlignment(JLabel.CENTER);
+		return this;
+	}
+
+}

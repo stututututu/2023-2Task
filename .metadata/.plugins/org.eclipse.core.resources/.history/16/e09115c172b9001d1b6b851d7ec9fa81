@@ -1,0 +1,9 @@
+package frames;
+
+public class LogInFrame {
+
+	public LogInFrame() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

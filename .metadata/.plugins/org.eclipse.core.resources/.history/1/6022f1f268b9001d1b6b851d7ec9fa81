@@ -1,0 +1,59 @@
+package base.comp;
+
+import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+
+public class imageLabel extends JLabel {
+
+	private Border line;
+	public imageLabel(String title, String path, int h, int w) {
+		// TODO Auto-generated constructor stub
+		super(title);
+		ImageIcon icon = new ImageIcon("./datafiles/"+ path + ".jpg");
+		Image img = icon.getImage();
+		
+		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+		
+		super.setIcon(new ImageIcon(img));
+		
+		
+	}
+	public imageLabel (String title, ImageIcon icon, int w, int h) {
+		super(title);
+		
+		Image img = icon.getImage();
+		
+		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+		
+		super.setIcon(new ImageIcon(img));
+		
+	}
+	public imageLable setLine() {
+		line = BorderFactory.createLineBorder(Color.black);
+		
+		super.setBorder(line);
+		return this;
+	}
+	public imageLable setTextCenter() {
+		super.setVerticalTextPosition(JLabel.CENTER);
+		super.setHorizontalTextPosition(JLabel.CENTER);
+		
+		return this;
+	}
+	public imageLable setCenter() {
+		super.setHorizontalAlignment(JLabel.CENTER);
+		return this;
+	}
+	public imageLable setBottom() {
+		super.setHorizontalAlignment(JLabel.CENTER);
+	
+	}
+	}
+}

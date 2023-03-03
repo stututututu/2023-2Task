@@ -1,0 +1,78 @@
+package frames;
+
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import base.comp.BaseFrame;
+import db.DbManager;
+
+public class SignUpFrame extends BaseFrame{
+
+	private DbManager db;
+	private BaseLabel jlTitle;
+	private JTextField jtId;
+	private JTextField jtName;
+	private JTextField jtPw;
+	private JButton jbSignUp;
+
+	public SignUpFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("회원가입", 360, 280);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlTitle = new BaseLabel("회원가입").setTitle(30).setCenter();
+		
+		jtName = new JTextField(10);
+		jtId = new JTextField(10);
+		jtPw = new JPasswordField(10);
+		
+		jbSignUp = new JButton("회원가입");
+		
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		
+		jpTop.add(jlTitle);
+		jpTop.setBorder(10,10,10,10);
+		
+		jpCenter.addChild();
+		jpCenter.jpLeft.setGrid(3, 1, 10, 10).add(new JLabel("이름"));
+		jpCenter.jpLeft.add(new JLabel("아이디"));
+		jpCenter.jpLeft.add(new JLabel("비밀번호"));
+		jpCenter.jpLeft.setBorder(10, 10, 10, 10);
+		
+		
+		jpCenter.jpCenter.setGrid(3, 1, 10, 10).add(jtName);
+		jpCenter.jpCenter.add(jtId);
+		jpCenter.jpCenter.add(jtPw);
+		jpCenter.jpCenter.setBorder(10, 10, 10, 10);
+		
+		jpBottom.add(jbSignUp);
+		jpBottom.setBorder(10,10,10,10);
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		jbSignUp.addActionListener(e -> {
+			String name = jtName.getText();
+			String id = jtId.getText();
+			String pw = jtPw.getText();
+			Vector<Vector<String>> check = db.getData("");
+			
+		});
+	}
+
+}

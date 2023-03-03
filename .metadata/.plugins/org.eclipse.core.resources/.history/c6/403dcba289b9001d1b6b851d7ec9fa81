@@ -1,0 +1,116 @@
+package frames;
+
+import java.awt.Color;
+import java.awt.Image;
+import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import base.comp.BaseFrame;
+import base.comp.BasePanel;
+import base.comp.imageLabel;
+import db.DbManager;
+
+public class MainFrame extends BaseFrame {
+
+	private DbManager db;
+	private JLabel jlImg;
+	private JComboBox jcTop;
+	private JButton jbLogin;
+	private JButton jbSignUp;
+	private JButton jbMyPage;
+	private JButton jbRead;
+	private JButton jbClose;
+	private JButton jbBookList;
+
+	public MainFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("메인", 1000, 844);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlImg = new imageLabel("로그인 후 이용해주세요", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
+		jcTop = new JComboBox<>();
+
+		jbLogin = new JButton("로그인");
+		jbSignUp = new JButton("회원가입");
+		jbBookList = new JButton("도서 목록");
+		jbMyPage = new JButton("마이페이지");
+		jbRead = new JButton("책 읽기");
+		jbClose = new JButton("종료");
+
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.add(jlImg);
+
+		jpCenter.setBorder(new TitledBorder(new LineBorder(Color.black), "인기 도서"));
+		jpCenter.addChild();
+		jpCenter.jpTop.setFlowLeft().add(jcTop);
+
+		jpCenter.jpCenter.setGrid(1, 5, 10, 10); // 5개가 되어 있는거잖아 이러면 안되지 .
+
+		Vector<Vector<String>> bookImgIndex = db.getData(
+				"SELECT \r\n" + "r.b_no,\r\n" + "b.b_name,\r\n" + "count(r.b_no)\r\n" + "FROM 2023지방_2.rental as r\r\n"
+						+ "join book as b\r\n" + "on r.b_no = b.b_no\r\n" + "group by r.b_no\r\n"
+						+ "order by count(r.b_no) desc, b.b_no\r\n" + "limit 5\r\n" + ";\r\n" + "");
+
+		for (Vector<String> row : bookImgIndex) {
+
+			ImageIcon icon = new ImageIcon("./datafiles/book/" + row.get(0) + ".jpg");
+			Image img = icon.getImage();
+			img = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+			BasePanel tmp = new BasePanel();
+
+		}
+
+		Vector<Vector<String>> cols = db.getData("select d_name from 2023지방_2.division;");
+
+		jcTop.addItem("전체");
+
+		for (int i = 0; i < cols.size(); i++) {
+//			jcTop.addItem(cols.get(i)); 
+
+			// 저렇게 하면 []가 들어가잖아 저러면 안되지, 2차원 데이터니까 .get.get으로 해야지.
+
+			jcTop.addItem(cols.get(i).get(0));
+		}
+
+		jpBottom.setFlowCenter().add(jbLogin);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbBookList);
+		jpBottom.add(jbMyPage);
+		jpBottom.add(jbRead);
+		jpBottom.add(jbClose);
+
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		jbLogin.addActionListener(e -> {
+			new LogInFrame();
+		});
+		jbSignUp.addActionListener(e -> {
+			new SignUpFrame();
+		});
+		jbBookList.addActionListener(e -> {
+			new BookList();
+		});
+
+	}
+
+}

@@ -1,0 +1,9 @@
+package frames;
+
+public class BaseLabel {
+
+	public BaseLabel() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

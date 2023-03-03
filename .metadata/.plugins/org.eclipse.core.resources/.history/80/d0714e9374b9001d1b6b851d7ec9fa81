@@ -1,0 +1,61 @@
+package frames;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import base.comp.BaseFrame;
+import db.DbManager;
+
+public class LogInFrame extends BaseFrame{
+
+	private DbManager db;
+	private JTextField jtId;
+	private JPasswordField jtPw;
+	private JButton jbLogIn;
+	private BaseLabel jlTitle;
+
+	public LogInFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("로그인", 425, 256);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jtId = new JTextField(10);
+		jtPw = new JPasswordField(10);
+		jbLogIn = new JButton("로그인");
+		
+		jlTitle = new BaseLabel("로그인").setTitle(30).setCenter();
+		
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.add(jlTitle);
+		
+		jpCenter.addChild();
+		jpCenter.jpLeft.setGrid(2, 1, 10, 10).add(new JLabel("아이디"));
+		jpCenter.jpLeft.add(new JLabel("비밀번호"));
+		jpCenter.jpLeft.setBorder(10,10,10,10);
+		
+		jpCenter.jpCenter.setGrid(2, 1, 10, 10).add(jtId);
+		jpCenter.jpCenter.add(jtPw);
+		jpCenter.jpCenter.setBorder(10, 20, 10, 20);
+		
+		jpBottom.add(jbLogIn);
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

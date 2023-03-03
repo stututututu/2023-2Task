@@ -1,0 +1,95 @@
+package frames;
+
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import base.comp.BaseFrame;
+import base.comp.message;
+import db.DbManager;
+import model.model;
+
+public class LogInFrame extends BaseFrame{
+
+	private DbManager db;
+	private JTextField jtId;
+	private JPasswordField jtPw;
+	private JButton jbLogIn;
+	private BaseLabel jlTitle;
+
+	public LogInFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("로그인", 373, 219);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jtId = new JTextField(10);
+		jtPw = new JPasswordField(10);
+		jbLogIn = new JButton("로그인");
+		
+		jlTitle = new BaseLabel("로그인").setTitle(30).setCenter();
+		
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.add(jlTitle);
+		jpTop.setBorder(10,0,0,0);
+		
+		jpCenter.addChild();
+		jpCenter.jpLeft.setGrid(2, 1, 10, 10).add(new JLabel("아이디"));
+		jpCenter.jpLeft.add(new JLabel("비밀번호"));
+		jpCenter.jpLeft.setBorder(10,20,10,10);
+		
+		jpCenter.jpCenter.setGrid(2, 1, 10, 10).add(jtId);
+		jpCenter.jpCenter.add(jtPw);
+		jpCenter.jpCenter.setBorder(10, 20, 10, 20);
+		
+		jpBottom.add(jbLogIn);
+		jpBottom.setBorder(10, 20, 10, 20);
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		
+		jbLogIn.addActionListener(e -> {
+			String id = jtId.getText();
+			String pw = jtPw.getText();
+			Vector<Vector<String>> check = db.getData("SELECT * FROM 2023지방_2.user where u_id = ? and u_pw = ?;", id, pw);
+			
+			if (id.isBlank() || pw.isBlank()) {
+				message.error("빈칸이 있습니다.");
+				return;
+			}
+			
+			if (check.size() != 0) {
+				message.error("아이디 또는 비밀번호를 확인하세요.");
+				jtId.setText("");
+				jtPw.setText("");
+				jtId.requestFocus();
+				return;
+				
+			}
+			if (id == "admin" && pw == "1234") {
+				model.LogState.add("관리자");
+				dispose();
+				return;
+			}
+			
+			model.LogState = check.get(0);
+			dispose();
+		});
+		
+	}
+
+}

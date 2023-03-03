@@ -1,11 +1,13 @@
 package db;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -17,7 +19,7 @@ import image.ImageModel;
 
 public class DbManager {
 
-	private String url = "jdbc:mysql://localhost/?"
+	private String url = "jdbc:mysql://localhost/2023지방_2?"
 			+ "CharacterEncoding=UTF-8&"
 			+ "serverTimezone=UTC&"
 			+ "allowPublicKeyRetrieval=true&"
@@ -89,41 +91,53 @@ public class DbManager {
 
 		return data;
 	}
-	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object...val){
-		Vector<ImageModel> data = new Vector<>();
-		try {
-			pstmt = con.prepareStatement(sql);
-			
-			int cnt = 1;
-			
-			for (int i = 0; i < val.length; i++) {
-				pstmt.setObject(i+1, val[i]);
-			}
-			ResultSet rs = pstmt.executeQuery();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			while (rs.next()) {
-				Vector<String> row = new Vector<>();
-				for (int i = 0; i < rsmd.getColumnCount(); i++) {
-					row.add(rs.getString(i+1));
-				}
+//	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object...val) {
+//		// TODO Auto-generated constructor stub
+//	
+//		Vector<ImageModel> data = new Vector<ImageModel>();
+//		
+//		try {
+//			pstmt = con.prepareStatement(sql);
+//
+//			int cnt = 1;
+//			for (int i = 0; i < val.length; i++) {
+//				pstmt.setObject(i+1,val[i]);
+//			}
+//
+//			ResultSet rs = pstmt.executeQuery();
+//			ResultSetMetaData rsmd = rs.getMetaData();
+//
+//			while(rs.next()) {
+//				Vector<String> row = new Vector<String>();
+//
+//				for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//					row.add(rs.getObject(i+1) + "");
+//				}
+//
+//				// blob 이미지 불러오기
 //				Blob blob = rs.getBlob(imageColIndex + 1);
-				ImageIcon icon = null;
-				
-				
-				
-//				data.add(row);
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			System.out.println("GetData Faild");
-			return null;
-			
-		}
-
-		return data;
-	}
+//				ImageIcon icon = null;
+//				try {
+//					icon = new ImageIcon(blob.getBinaryStream().readAllBytes());
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//				
+//				ImageModel model = new ImageModel(row, icon);
+//
+//				data.add(model);
+//			}
+//			
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return data;
+//	}
 	
 	
 }

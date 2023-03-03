@@ -1,0 +1,34 @@
+package frames;
+
+import base.comp.BaseFrame;
+import db.DbManager;
+
+public class LogInFrame extends BaseFrame{
+
+	private DbManager db;
+
+	public LogInFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("로그인", 300, 200);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
