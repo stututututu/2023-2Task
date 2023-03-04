@@ -1,0 +1,97 @@
+package frames;
+
+import java.util.Vector;
+import java.util.regex.Pattern;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import base.comp.BaseFrame;
+import base.comp.message;
+import db.DbManager;
+
+public class SignUpFrame extends BaseFrame{
+
+	private DbManager db;
+	private BaseLabel jlTitle;
+	private JTextField jtId;
+	private JTextField jtName;
+	private JTextField jtPw;
+	private JButton jbSignUp;
+
+	public SignUpFrame() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("회원가입", 360, 280);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlTitle = new BaseLabel("회원가입").setTitle(30).setCenter();
+		
+		jtName = new JTextField(10);
+		jtId = new JTextField(10);
+		jtPw = new JPasswordField(10);
+		
+		jbSignUp = new JButton("회원가입");
+		
+		
+	}
+
+	@Override
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		
+		jpTop.add(jlTitle);
+		jpTop.setBorder(10,10,10,10);
+		
+		jpCenter.addChild();
+		jpCenter.jpLeft.setGrid(3, 1, 10, 10).add(new JLabel("이름"));
+		jpCenter.jpLeft.add(new JLabel("아이디"));
+		jpCenter.jpLeft.add(new JLabel("비밀번호"));
+		jpCenter.jpLeft.setBorder(10, 10, 10, 10);
+		
+		
+		jpCenter.jpCenter.setGrid(3, 1, 10, 10).add(jtName);
+		jpCenter.jpCenter.add(jtId);
+		jpCenter.jpCenter.add(jtPw);
+		jpCenter.jpCenter.setBorder(10, 10, 10, 10);
+		
+		jpBottom.add(jbSignUp);
+		jpBottom.setBorder(10,10,10,10);
+		
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+		jbSignUp.addActionListener(e -> {
+			String name = jtName.getText();
+			String id = jtId.getText();
+			String pw = jtPw.getText();
+			
+			String ptName = "^(.*[ㄱ-ㅎㅏ-ㅣ가-힣]).{4,}$";
+			boolean ckName = Pattern.matches(ptName, name);
+			
+			Vector<Vector<String>> check = db.getData("SELECT * FROM 2023지방_2.user where u_id = ?;", id);
+//			if (id.isBlank() || pw.isBlank()) {
+//				message.error("빈칸이 있습니다.");
+//			}
+			if (ckName) {
+				message.error("이름은 한글로 두글자 이상만 가능합니다.");
+				return;
+			}
+			
+			
+			db.setData("INSERT INTO `2023지방_2`.`user` (`u_name`, `u_id`, `u_pw`) VALUES (?, ?, ?);\r\n"
+					+ "", name, id,pw);
+			message.info(name+"님 회원가입이 완료되었습니다.");
+			
+			
+		});
+	}
+
+}

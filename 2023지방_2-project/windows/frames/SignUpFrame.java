@@ -1,6 +1,7 @@
 package frames;
 
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -71,10 +72,41 @@ public class SignUpFrame extends BaseFrame{
 			String name = jtName.getText();
 			String id = jtId.getText();
 			String pw = jtPw.getText();
+			
+			String ptName = "^(.*[ㄱ-ㅎㅏ-ㅣ가-힣]).{1,}$";
+			boolean ckName = Pattern.matches(ptName, name);
+			
+			String ptId = "^(.*[ㄱ-ㅎㅏ-ㅣ가-힣])$";
+			boolean ckId = Pattern.matches(ptId, id);
+			
+			String ptPw = "^(?=.*[1-9])(?=.*[a-zA-Z])(?=.*[!@#$]).{6,}$";
+			boolean ckPw = Pattern.matches(ptPw, pw);
+			
 			Vector<Vector<String>> check = db.getData("SELECT * FROM 2023지방_2.user where u_id = ?;", id);
 			if (id.isBlank() || pw.isBlank()) {
 				message.error("빈칸이 있습니다.");
 			}
+			if (!ckName) {
+				message.error("이름은 한글로 두글자 이상만 가능합니다.");
+				return;
+			}
+			if (check.size() != 0 || id == "admin") {
+				message.error("이미 있는 아이디 입니다.");
+				return;
+			}
+			if (ckId) {
+				message.error("아이디에 한글은 사용이 불가합니다.");
+				return;
+			}
+			if (!ckPw) {
+				message.error("비밀번호 형식이 일치하지 않습니다.");
+				return;
+			}
+					
+			db.setData("INSERT INTO `2023지방_2`.`user` (`u_name`, `u_id`, `u_pw`) VALUES (?, ?, ?);\r\n"
+					+ "", name, id,pw);
+			message.info(name+"님 회원가입이 완료되었습니다.");
+			dispose();
 			
 			
 		});

@@ -50,5 +50,12 @@ public abstract class BaseFrame extends JFrame implements IDesign{
 		
 		
 	}
+
+
+	public void refresh() {
+		// TODO Auto-generated method stub
+		super.validate();
+		super.repaint();
+	}
 	
 }

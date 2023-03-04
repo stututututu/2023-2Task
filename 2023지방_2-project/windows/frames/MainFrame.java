@@ -16,6 +16,7 @@ import base.comp.BaseFrame;
 import base.comp.BasePanel;
 import base.comp.imageLabel;
 import db.DbManager;
+import model.model;
 
 public class MainFrame extends BaseFrame {
 
@@ -48,6 +49,9 @@ public class MainFrame extends BaseFrame {
 		jbRead = new JButton("책 읽기");
 		jbClose = new JButton("종료");
 
+		jbBookList.setEnabled(false);
+		jbMyPage.setEnabled(false);
+		jbRead.setEnabled(false);
 	}
 
 	@Override
@@ -55,8 +59,8 @@ public class MainFrame extends BaseFrame {
 		// TODO Auto-generated method stub
 		jpTop.add(jlImg);
 
-		jpCenter.setBorder(new TitledBorder(new LineBorder(Color.black), "인기 도서"));
 		jpCenter.addChild();
+		jpCenter.jpCenter.setBorder(new TitledBorder(new LineBorder(Color.black), "인기 도서"));
 		jpCenter.jpTop.setFlowLeft().add(jcTop);
 
 		jpCenter.jpCenter.setGrid(1, 5, 10, 10);
@@ -110,14 +114,13 @@ public class MainFrame extends BaseFrame {
 		jpBottom.add(jbMyPage);
 		jpBottom.add(jbRead);
 		jpBottom.add(jbClose);
-
 	}
 
 	@Override
 	public void events() {
 		// TODO Auto-generated method stub
 		jbLogin.addActionListener(e -> {
-			new LogInFrame();
+			new LogInFrame(this);
 		});
 		jbSignUp.addActionListener(e -> {
 			new SignUpFrame();
@@ -127,5 +130,25 @@ public class MainFrame extends BaseFrame {
 		});
 
 	}
+	public void logInState() {
+		// TODO Auto-generated method stub
+		jpBottom.removeAll();
+		jlImg = new imageLabel(model.LogState.get(1)+"님 환영합니다.", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
+		jpTop.removeAll();
+		jpTop.add(jlImg);
+		jbBookList.setEnabled(true);
+		jbMyPage.setEnabled(true);
+		jbRead.setEnabled(true);
 
+		
+		jpBottom.setFlowCenter().add(jbLogin);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbBookList);
+		jpBottom.add(jbMyPage);
+		jpBottom.add(jbRead);
+		jpBottom.add(jbClose);
+		
+		super.refresh();
+	}
 }
