@@ -2,6 +2,7 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -46,6 +47,8 @@ public class BookList extends BaseFrame {
 		jlTitle = new BaseLabel("도서 목록").setTitle(30).setCenter();
 
 		jcSearCh = new JComboBox<>();
+		jcSearCh.addItem("도서명");
+		jcSearCh.addItem("저자");
 
 		jtSearch = new JTextField(10);
 		
@@ -114,6 +117,30 @@ public class BookList extends BaseFrame {
 	@Override
 	public void events() {
 		// TODO Auto-generated method stub
+		jbSearch.addActionListener(e -> {
+		jpCenter.jpCenter.removeAll();
+		jp.removeAll();
+		BasePanel jpTmp = new BasePanel();
+		String comboState = jcSearCh.getSelectedItem().toString();
+		
+		String searchTxt = jtSearch.getText();
+		
+		if (comboState == "도서명") {
+			Vector<Vector<String>> size = db.getData("SELECT b_no, b_name FROM 2023지방_2.book where b_name = ?;", searchTxt);
+			for (int i = 0; i < size.size(); i++) {
+				jpTmp.addChild();
+				jpTmp.jpTop.add(new imageLabel(null, "book/"+ size.get(i).get(0), 200, 200));
+				jpTmp.jpBottom.add(new JLabel(size.get(i).get(1)));
+				
+				jp.add(jpTmp);
+				bookScroll = new JScrollPane(jp);
+				jpCenter.jpCenter.add(bookScroll);
+				
+			}
+			
+		}
+		
+		});
 
 	}
 

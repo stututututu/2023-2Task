@@ -91,53 +91,53 @@ public class DbManager {
 
 		return data;
 	}
-//	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object...val) {
-//		// TODO Auto-generated constructor stub
-//	
-//		Vector<ImageModel> data = new Vector<ImageModel>();
-//		
-//		try {
-//			pstmt = con.prepareStatement(sql);
-//
-//			int cnt = 1;
-//			for (int i = 0; i < val.length; i++) {
-//				pstmt.setObject(i+1,val[i]);
-//			}
-//
-//			ResultSet rs = pstmt.executeQuery();
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//
-//			while(rs.next()) {
-//				Vector<String> row = new Vector<String>();
-//
-//				for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//					row.add(rs.getObject(i+1) + "");
-//				}
-//
-//				// blob 이미지 불러오기
-//				Blob blob = rs.getBlob(imageColIndex + 1);
-//				ImageIcon icon = null;
-//				try {
-//					icon = new ImageIcon(blob.getBinaryStream().readAllBytes());
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//				
-//				ImageModel model = new ImageModel(row, icon);
-//
-//				data.add(model);
-//			}
-//			
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return data;
-//	}
+	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object...val) {
+		// TODO Auto-generated constructor stub
+	
+		Vector<ImageModel> data = new Vector<ImageModel>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			int cnt = 1;
+			for (int i = 0; i < val.length; i++) {
+				pstmt.setObject(i+1,val[i]);
+			}
+
+			ResultSet rs = pstmt.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+
+			while(rs.next()) {
+				Vector<String> row = new Vector<String>();
+
+				for (int i = 0; i < rsmd.getColumnCount(); i++) {
+					row.add(rs.getObject(i+1) + "");
+				}
+
+				// blob 이미지 불러오기
+				Blob blob = (Blob) rs.getBlob(imageColIndex + 1);
+				ImageIcon icon = null;
+				try {
+					icon = new ImageIcon(blob.getBinaryStream().readAllBytes());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				
+				ImageModel model = new ImageModel(row, icon);
+
+				data.add(model);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
 	
 	
 }

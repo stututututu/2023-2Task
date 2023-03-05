@@ -33,13 +33,10 @@
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
     <fullyQualifiedTypeName name="javax.swing.Scrollable"/>
-    <fullyQualifiedTypeName name="base.comp.BasePanel"/>
-    <fullyQualifiedTypeName name="base.comp.imageLabel"/>
     <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
     <fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
-    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
@@ -48,4 +45,9 @@
     <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
     <fullyQualifiedTypeName name="model.model"/>
     <fullyQualifiedTypeName name="base.comp.message"/>
+    <fullyQualifiedTypeName name="java.rmi.server.LogStream"/>
+    <fullyQualifiedTypeName name="base.comp.BasePanel"/>
+    <fullyQualifiedTypeName name="base.comp.imageLabel"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
 </qualifiedTypeNameHistroy>

@@ -49,9 +49,9 @@ public class MainFrame extends BaseFrame {
 		jbRead = new JButton("책 읽기");
 		jbClose = new JButton("종료");
 
-		jbBookList.setEnabled(false);
-		jbMyPage.setEnabled(false);
-		jbRead.setEnabled(false);
+//		jbBookList.setEnabled(false);
+//		jbMyPage.setEnabled(false);
+//		jbRead.setEnabled(false);
 	}
 
 	@Override
@@ -92,7 +92,6 @@ public class MainFrame extends BaseFrame {
 			tmp.setBorder(BorderFactory.createLineBorder(Color.black));
 
 			jpCenter.jpCenter.add(tmp);
-
 		}
 
 		Vector<Vector<String>> cols = db.getData("select d_name from 2023지방_2.division;");

@@ -137,11 +137,19 @@ public class SetDataBase {
 					+ "SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;\r\n"
 					+ "");
 			db.setData("set global local_infile = 1;");
-			db.setData("load data local infile './datafiles/division.txt' into table division ignore 1 lines;");
-			db.setData("load data local infile './datafiles/book.txt' into table book ignore 1 lines;");
-			db.setData("load data local infile './datafiles/user.txt' into table user ignore 1 lines;");
-			db.setData("load data local infile './datafiles/rental.txt' into table rental ignore 1 lines;");
-			db.setData("load data local infile './datafiles/likebook.txt' into table likebook ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/user.txt' into table user ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/division.txt' into table division ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/book.txt' into table book ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/likebook.txt' into table likebook ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/rental.txt' into table rental ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/user.txt' into table user lines terminated by '\\r' ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/division.txt' into table division lines terminated by '\\r' ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/book.txt' into table book lines terminated by '\\r\\n' ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/likebook.txt' into table likebook lines terminated by '\\r' ignore 1 lines;");
+//			db.setData("load data local infile './datafiles/rental.txt' into table rental lines terminated by '\\r' ignore 1 lines;");
+			db.setData("drop user if exists 'user'@'localhost';\r\n"
+				+ "create user 'user'@'localhost' identified by '1234';\r\n"
+				+ "grant insert, delete, update, select on 2023지방_2.* to 'user'@'localhost';");
 			setImg();
 			JOptionPane.showMessageDialog(null, "세팅 성공", "정보", JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
@@ -163,7 +171,7 @@ public class SetDataBase {
 			File file = new File("./datafiles/book/" + b_no +".jpg");
 			try {
 				FileInputStream path = new FileInputStream(file);
-				db.setData("UPDATE `2023지방_2`.`book` SET `b_img` = ? WHERE (`b_no` = ?);\r\n"
+				db.setData("UPDATE `2023지방_2`.`book` SET `b_img` = ? WHERE (`b_no` = ?);"
 						+ "", path, b_no);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
