@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -11,18 +13,23 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.xml.crypto.Data;
 
+import base.comp.BaseCombo;
 import base.comp.BaseFrame;
 import base.comp.BasePanel;
 import base.comp.imageLabel;
+import data.DataManager;
 import db.DbManager;
+import image.ImageModel;
 import model.model;
+import model.res;
 
 public class MainFrame extends BaseFrame {
 
 	private DbManager db;
 	private JLabel jlImg;
-	private JComboBox jcTop;
+	private BaseCombo jcTop;
 	private JButton jbLogin;
 	private JButton jbSignUp;
 	private JButton jbMyPage;
@@ -40,7 +47,7 @@ public class MainFrame extends BaseFrame {
 	public void setComp() {
 		// TODO Auto-generated method stub
 		jlImg = new imageLabel("로그인 후 이용해주세요", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
-		jcTop = new JComboBox<>();
+		jcTop = new BaseCombo(res.getDivisionTableAll());
 
 		jbLogin = new JButton("로그인");
 		jbSignUp = new JButton("회원가입");
@@ -64,56 +71,12 @@ public class MainFrame extends BaseFrame {
 		jpCenter.jpTop.setFlowLeft().add(jcTop);
 
 		jpCenter.jpCenter.setGrid(1, 5, 10, 10);
-		// 5개가 되어 있는거잖아 이러면 안되지 by 이클립스 AI.
 
-		Vector<Vector<String>> bookImgIndex = db.getData(
-				"SELECT \r\n" + "r.b_no,b.b_name,count(r.b_no) FROM 2023지방_2.rental as r\r\n"
-						+ "join book as b\r\n" + "on r.b_no = b.b_no\r\n" + "group by r.b_no\r\n"
-						+ "order by count(r.b_no) desc, b.b_no\r\n" + "limit 5\r\n" + ";\r\n" + "");
+		gridChange();
 
-		// 이것도 못하십니까 ? ? 실행을 해보세요 by eclipse AI.
-		for (Vector<String> row : bookImgIndex) {
-
-//			ImageIcon icon = new ImageIcon("./datafiles/book/" + row.get(0) + ".jpg");
-//			Image img = icon.getImage();
-//			img = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-//
-//			icon = new ImageIcon(img);
-			imageLabel jlimg = new imageLabel(null, "book/"+row.get(0), 200, 200);
-
-			BasePanel tmp = new BasePanel();
-			tmp.addChild();
-			//이렇게 하지 그랬어 by 컴퓨터 주인
-
-//			tmp.jpCenter.add(new JLabel(icon));
-			tmp.jpCenter.add(jlimg);
-			tmp.jpBottom.add(new JLabel(row.get(1)));
-
-			tmp.setBorder(BorderFactory.createLineBorder(Color.black));
-
-			jpCenter.jpCenter.add(tmp);
-		}
-
-		Vector<Vector<String>> cols = db.getData("select d_name from 2023지방_2.division;");
-
-		jcTop.addItem("전체");
-
-		for (int i = 0; i < cols.size(); i++) {
-//			jcTop.addItem(cols.get(i)); 
-
-			// 저렇게 하면 []가 들어가잖아 저러면 안되지, 2차원 데이터니까 .get.get으로 해야지.by 이클립스 AI.
-
-			jcTop.addItem(cols.get(i).get(0));
-		}
-
-		jpBottom.setFlowCenter().add(jbLogin);
-		jpBottom.add(jbSignUp);
-		jpBottom.add(jbSignUp);
-		jpBottom.add(jbBookList);
-		jpBottom.add(jbMyPage);
-		jpBottom.add(jbRead);
-		jpBottom.add(jbClose);
+		logOutState();
 	}
+
 
 	@Override
 	public void events() {
@@ -127,8 +90,87 @@ public class MainFrame extends BaseFrame {
 		jbBookList.addActionListener(e -> {
 			new BookList();
 		});
+		jcTop.addActionListener(e -> {
+			gridChange();
+		});
+		
 
 	}
+	private void gridChange() {
+		// TODO Auto-generated method stub
+		
+		jpCenter.jpCenter.removeAll();
+		
+		int comboIndex = jcTop.getSelectedIndex();
+		
+		String d_no = jcTop.data.get(comboIndex).get(1);
+		
+		Vector<ImageModel> data = db.getImageData("select d.d_no, b.b_name, d.d_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\r\n"
+				+ "join division as d\r\n"
+				+ "	on b.d_no = d.d_no\r\n"
+				+ "    join rental as r \r\n"
+				+ "    on b.b_no = r.b_no\r\n"
+				+ "	where d.d_no like ?"
+				+ "    group by b.b_no\r\n"
+				+ "    \r\n"
+				+ "    order by count(b.b_no) desc, b.b_no\r\n"
+				+ "    limit 5;",3, d_no);
+		for (ImageModel row : data) {
+			String no = row.getData().get(0);
+			String title = row.getData().get(1);
+			String author = row.getData().get(4);
+			String exp = row.getData().get(5);
+			
+			jlImg = new imageLabel(title, row.getIcon(), 150, 180).setBottom().setLine().setCenter().setSize(14);
+			
+			jlImg.addMouseListener(new MouseAdapter() {
+			
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mousePressed(e);
+				}
+			
+			});
+			
+			author = DataManager.subString(author, 13, "");
+			exp = DataManager.subString(exp, 13, "");
+			
+			String toolTipText = "<html>"
+					+ "저자 : " + author + "<br/>"
+							+ "설명 : " + exp + "</html>";
+			jlImg.setToolTipText(toolTipText);
+			
+			jpCenter.jpCenter.add(jlImg);
+			
+			
+		}
+		
+		super.refresh();
+		
+	}
+	public void logOutState() {
+		// TODO Auto-generated method stub
+		jpBottom.removeAll();
+		model.LogState = null;
+
+		
+		jbBookList.setEnabled(false);
+		jbMyPage.setEnabled(false);
+		jbRead.setEnabled(false);
+		
+		
+		jpBottom.setFlowCenter().add(jbLogin);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbSignUp);
+		jpBottom.add(jbBookList);
+		jpBottom.add(jbMyPage);
+		jpBottom.add(jbRead);
+		jpBottom.add(jbClose);
+		
+		super.refresh();
+	}
+
 	public void logInState() {
 		// TODO Auto-generated method stub
 		jpBottom.removeAll();

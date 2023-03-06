@@ -2,6 +2,7 @@ package db;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +14,6 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
-import com.mysql.cj.jdbc.Blob;
 
 import image.ImageModel;
 
@@ -29,6 +29,8 @@ public class DbManager {
 	private String pw = "1234";
 	private Connection con;
 	private PreparedStatement pstmt;
+	
+	public static DbManager db = new DbManager();
 
 	public DbManager() {
 
@@ -115,7 +117,7 @@ public class DbManager {
 				}
 
 				// blob 이미지 불러오기
-				Blob blob = (Blob) rs.getBlob(imageColIndex + 1);
+				Blob blob = rs.getBlob(imageColIndex + 1);
 				ImageIcon icon = null;
 				try {
 					icon = new ImageIcon(blob.getBinaryStream().readAllBytes());

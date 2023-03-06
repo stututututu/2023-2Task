@@ -65,5 +65,5 @@ public class imageLabel extends JLabel {
 		super.setForeground(Color.white);
 		return this;
 	}
-	
+
 }

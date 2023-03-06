@@ -1,0 +1,9 @@
+package model;
+
+import java.util.Vector;
+
+public class res {
+
+	public static Vector<String> login = nul;
+
+}

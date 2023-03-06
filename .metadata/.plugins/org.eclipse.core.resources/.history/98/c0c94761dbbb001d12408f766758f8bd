@@ -1,0 +1,28 @@
+package base.comp;
+
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.JComboBox;
+
+public class BaseCombo extends JComboBox<String>{
+
+	
+	
+	private Vector<Vector<String>> data;
+	public BaseCombo(String...val) {
+		// TODO Auto-generated constructor stub
+		for (int i = 0; i < val.length; i++) {
+			super.addItem(val[i]);
+		}
+		
+	}
+	public  BaseCombo(Vector<Vector<String>> data) {
+		this.data = data;
+		
+		for (Vector<String> row : data) {
+			super.addItem(row.get(0));
+		}
+	}
+
+}

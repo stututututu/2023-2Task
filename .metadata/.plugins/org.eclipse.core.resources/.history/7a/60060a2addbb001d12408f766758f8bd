@@ -1,0 +1,69 @@
+package base.comp;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+
+public class imageLabel extends JLabel {
+
+	private Border line;
+	public imageLabel(String title, String path, int w, int h) {
+		// TODO Auto-generated constructor stub
+		super(title);
+		ImageIcon icon = new ImageIcon("./datafiles/"+ path + ".jpg");
+		Image img = icon.getImage();
+		
+		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+		
+		super.setIcon(new ImageIcon(img));
+		
+		
+	}
+	public imageLabel (String title, ImageIcon icon, int w, int h) {
+		super(title);
+		
+		Image img = icon.getImage();
+		
+		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+		
+		super.setIcon(new ImageIcon(img));
+		
+	}
+	public imageLabel setLine() {
+		line = BorderFactory.createLineBorder(Color.black);
+		
+		super.setBorder(line);
+		return this;
+	}
+	public imageLabel setTextCenter() {
+		super.setVerticalTextPosition(JLabel.CENTER);
+		super.setHorizontalTextPosition(JLabel.CENTER);
+		
+		return this;
+	}
+	public imageLabel setCenter() {
+		super.setHorizontalAlignment(JLabel.CENTER);
+		return this;
+	}
+	public imageLabel setBottom() {
+		super.setVerticalTextPosition(JLabel.BOTTOM);
+		super.setHorizontalTextPosition(JLabel.CENTER);
+		return this;
+	}
+	public imageLabel setSize(int size)	{
+		super.setFont(new Font("HY헤드라인M",Font.PLAIN, size));
+		return this;
+	}
+	public imageLabel setColorWhite() {
+		super.setForeground(Color.white);
+		return this;
+	}
+	
+}
