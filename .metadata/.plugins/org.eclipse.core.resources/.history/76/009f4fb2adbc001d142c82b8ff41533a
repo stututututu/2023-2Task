@@ -1,0 +1,29 @@
+package base.comp;
+
+import java.util.Vector;
+
+import db.DbManager;
+
+public class BaseTable extends Vector<Object> {
+
+	public Vector cols;
+
+	public BaseTable(Object...val) {
+		// TODO Auto-generated constructor stub
+		
+		cols = new Vector<>();
+		for (Object vals : val) {
+			cols.add(vals);
+			
+		}
+	}
+
+	public Vector<Vector<String>> getTableData(String sql) {
+		// TODO Auto-generated method stub
+		
+		DbManager.db.getData(sql);
+		
+		return null;
+	}
+	
+}

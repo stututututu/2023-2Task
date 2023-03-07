@@ -73,10 +73,8 @@ public class MainFrame extends BaseFrame {
 		jpCenter.jpCenter.setGrid(1, 5, 10, 10);
 
 		gridChange();
-
 		logOutState();
 	}
-
 
 	@Override
 	public void events() {
@@ -93,73 +91,68 @@ public class MainFrame extends BaseFrame {
 		jcTop.addActionListener(e -> {
 			gridChange();
 		});
-		
 
 	}
+
 	private void gridChange() {
 		// TODO Auto-generated method stub
-		
+
 		jpCenter.jpCenter.removeAll();
-		
-		int comboIndex = jcTop.getSelectedIndex();
-		
-		String d_no = jcTop.data.get(comboIndex).get(1);
-		
-		Vector<ImageModel> data = db.getImageData("select d.d_no, b.b_name, d.d_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\r\n"
-				+ "join division as d\r\n"
-				+ "	on b.d_no = d.d_no\r\n"
-				+ "    join rental as r \r\n"
-				+ "    on b.b_no = r.b_no\r\n"
-				+ "	where d.d_no like ?"
-				+ "    group by b.b_no\r\n"
-				+ "    \r\n"
-				+ "    order by count(b.b_no) desc, b.b_no\r\n"
-				+ "    limit 5;",3, d_no);
+
+		String comboIndex = jcTop.getSelectedIndex() + "";
+		if (comboIndex.equals("0")) {
+			comboIndex = "%";
+		}
+//		String d_no = jcTop.data.get(comboIndex).get(1);
+
+		Vector<ImageModel> data = db
+				.getImageData(
+						"select d.d_no, b.b_name, d.d_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\r\n"
+								+ "join division as d\r\n" + "	on b.d_no = d.d_no\r\n" + "    join rental as r \r\n"
+								+ "    on b.b_no = r.b_no\r\n" + "	where d.d_no like ?" + "    group by b.b_no\r\n"
+								+ "    \r\n" + "    order by count(b.b_no) desc, b.b_no\r\n" + "    limit 5;",
+						3, comboIndex);
 		for (ImageModel row : data) {
 			String no = row.getData().get(0);
 			String title = row.getData().get(1);
 			String author = row.getData().get(4);
 			String exp = row.getData().get(5);
-			
+
 			jlImg = new imageLabel(title, row.getIcon(), 150, 180).setBottom().setLine().setCenter().setSize(14);
-			
+
 			jlImg.addMouseListener(new MouseAdapter() {
-			
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					// TODO Auto-generated method stub
 					super.mousePressed(e);
 				}
-			
+
 			});
-			
+
 			author = DataManager.subString(author, 13, "");
 			exp = DataManager.subString(exp, 13, "");
-			
-			String toolTipText = "<html>"
-					+ "저자 : " + author + "<br/>"
-							+ "설명 : " + exp + "</html>";
+
+			String toolTipText = "<html>" + "저자 : " + author + "<br/>" + "설명 : " + exp + "</html>";
 			jlImg.setToolTipText(toolTipText);
-			
+
 			jpCenter.jpCenter.add(jlImg);
-			
-			
+
 		}
-		
+
 		super.refresh();
-		
+
 	}
+
 	public void logOutState() {
 		// TODO Auto-generated method stub
 		jpBottom.removeAll();
 		model.LogState = null;
 
-		
-		jbBookList.setEnabled(false);
+		jbBookList.setEnabled(true);
 		jbMyPage.setEnabled(false);
 		jbRead.setEnabled(false);
-		
-		
+
 		jpBottom.setFlowCenter().add(jbLogin);
 		jpBottom.add(jbSignUp);
 		jpBottom.add(jbSignUp);
@@ -167,21 +160,21 @@ public class MainFrame extends BaseFrame {
 		jpBottom.add(jbMyPage);
 		jpBottom.add(jbRead);
 		jpBottom.add(jbClose);
-		
+
 		super.refresh();
 	}
 
 	public void logInState() {
 		// TODO Auto-generated method stub
 		jpBottom.removeAll();
-		jlImg = new imageLabel(model.LogState.get(1)+"님 환영합니다.", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
 		jpTop.removeAll();
+		jlImg = new imageLabel(model.LogState.get(1) + "님 환영합니다.", "메인3", 1000, 500).setSize(30).setTextCenter().setColorWhite();
 		jpTop.add(jlImg);
+		jbSignUp.setEnabled(false);
 		jbBookList.setEnabled(true);
 		jbMyPage.setEnabled(true);
 		jbRead.setEnabled(true);
 
-		
 		jpBottom.setFlowCenter().add(jbLogin);
 		jpBottom.add(jbSignUp);
 		jpBottom.add(jbSignUp);
@@ -189,7 +182,7 @@ public class MainFrame extends BaseFrame {
 		jpBottom.add(jbMyPage);
 		jpBottom.add(jbRead);
 		jpBottom.add(jbClose);
-		
+
 		super.refresh();
 	}
 }

@@ -1,0 +1,67 @@
+package base.comp;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import db.DbManager;
+
+public class BaseTable extends JScrollPane {
+
+	private JScrollPane scroll;
+	private Vector<Vector<String>> data;
+	private JTable Table;
+	private DefaultTableModel dtm;
+	private Vector<String> cols;
+	private int divisionColIndex;
+
+	public BaseTable(String sql, String...cols) {
+		// TODO Auto-generated constructor stub
+	}
+	public BaseTable(Vector<Vector<String>> divisionData,int divisionColIndex, String...val) {
+		// TODO Auto-generated constructor stub
+		
+		cols = new Vector<String>();
+		this.data = divisionData;
+		this.divisionColIndex = divisionColIndex;
+		
+		for (String vals : val) {
+			cols.add(vals);
+			
+		}
+	}
+
+
+	public void setTable(JTable table) {
+		dtm = new DefaultTableModel(data,cols);
+		
+		Table = new JTable(dtm);
+		
+		
+
+	}
+	public BaseTable pSize(int w, int d) {
+		super.setPreferredSize(new Dimension(w,d));
+		return this;
+	}
+
+	public void tableInit() {
+		
+		for (int i = divisionColIndex; i < cols.size(); i++) {
+			Table.getColumnModel().getColumn(i).setMinWidth(0);
+			Table.getColumnModel().getColumn(i).setMaxWidth(0);
+			Table.getColumnModel().getColumn(i).setWidth(0);
+		}
+		
+		Table.getTableHeader().setBackground(Color.white);
+		super.getViewport().setBackground(Color.white);
+		
+	}
+
+	
+}

@@ -1,0 +1,121 @@
+package frames;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.ScrollPane;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import base.comp.BaseFrame;
+import base.comp.BasePanel;
+import base.comp.BaseTable;
+import base.comp.imageLabel;
+import db.DbManager;
+
+public class BookList extends BaseFrame {
+
+	private DbManager db;
+	private BaseLabel jlTitle;
+	private JComboBox jcSearCh;
+	private JTextField jtSearch;
+	private JButton jbSearch;
+	private Vector<Object> cols;
+	private Vector<Vector<String>> data;
+	private DefaultTableModel dtm;
+	private JTable table;
+	private JScrollPane scroll;
+	private Vector<Vector<String>> book;
+	private BasePanel jp;
+	private JScrollPane bookScroll;
+	private Vector<Vector<String>> cData;
+
+	public BookList() {
+		// TODO Auto-generated constructor stub
+		db = new DbManager();
+		super.BaseFrame("도서목록", 1061, 594);
+	}
+
+	@Override
+	public void setComp() {
+		// TODO Auto-generated method stub
+		jlTitle = new BaseLabel("도서 목록").setTitle(30).setCenter();
+
+		jcSearCh = new JComboBox<>();
+		jcSearCh.addItem("도서명");
+		jcSearCh.addItem("저자");
+
+		jtSearch = new JTextField(10);
+		
+
+		jbSearch = new JButton("검색");
+
+		cols = new BaseTable("분류", "");
+		cData = db.getData("SELECT d_name, d_no FROM 2023지방_2.division;");
+		
+		
+		data = new BaseTable().getTableData("select d.d_name,  d.d_no,  b.b_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\\r\\n\"\r\n"
+				+ "				+ \"join division as d\\r\\n\"\r\n"
+				+ "				+ \"	on b.d_no = d.d_no\\r\\n\"\r\n"
+				+ "				+ \"    join rental as r \\r\\n\"\r\n"
+				+ "				+ \"    on b.b_no = r.b_no\\r\\n\"\r\n"
+				+ "				+ \"	where d.d_no like \\\"%\\\" \\r\\n\"\r\n"
+				+ "				+ \"    group by b.b_no\\r\\n\"\r\n"
+				+ "				+ \"    \\r\\n\"\r\n"
+				+ "				+ \"    order by count(b.b_no) desc, b.b_no;");
+
+		dtm = new DefaultTableModel(cData, cols);
+
+		table = new JTable(dtm);
+
+		scroll = new JScrollPane(table);
+		scroll.setPreferredSize(new Dimension(70, 80));
+		
+		
+		
+		jp = new BasePanel().setGrid(0, 4, 10, 10);
+			
+		
+	}
+
+
+	public void setDesign() {
+		// TODO Auto-generated method stub
+		jpTop.addChild();
+		jpTop.jpCenter.add(jlTitle);
+		jpTop.jpBottom.setFlowRight().add(new JLabel("검색"));
+		jpTop.jpBottom.add(jcSearCh);
+		jpTop.jpBottom.add(jtSearch);
+		jpTop.jpBottom.add(jbSearch);
+		
+		
+		jpCenter.addChild();
+		jpCenter.jpLeft.addChild();
+		
+		jpCenter.jpLeft.jpLeft.add(scroll);
+		
+		jpCenter.jpCenter.add(bookScroll);
+		
+		jpCenter.setBorder(10,10,10,10);
+		
+		jpBottom.setFlowRight().add(new JLabel("검색결과:"+ book.size()));
+		
+		 
+		
+
+	}
+
+	@Override
+	public void events() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

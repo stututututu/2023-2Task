@@ -14,26 +14,35 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
+import base.comp.BaseCombo;
 import base.comp.BaseFrame;
 import base.comp.BasePanel;
+import base.comp.BaseTable;
 import base.comp.imageLabel;
+import base.comp.message;
 import db.DbManager;
+import image.ImageModel;
 
 public class BookList extends BaseFrame {
 
 	private DbManager db;
 	private BaseLabel jlTitle;
-	private JComboBox jcSearCh;
 	private JTextField jtSearch;
 	private JButton jbSearch;
 	private Vector<Object> cols;
-	private Vector<Vector<String>> data;
 	private DefaultTableModel dtm;
 	private JTable table;
 	private JScrollPane scroll;
 	private Vector<Vector<String>> book;
 	private BasePanel jp;
 	private JScrollPane bookScroll;
+	public Vector<Vector<String>> divisionData;
+	private BaseTable jLeftTable;
+	private JScrollPane jspCenter;
+	private BaseCombo jcCombo;
+	private JButton jbSeatch;
 
 	public BookList() {
 		// TODO Auto-generated constructor stub
@@ -46,54 +55,38 @@ public class BookList extends BaseFrame {
 		// TODO Auto-generated method stub
 		jlTitle = new BaseLabel("도서 목록").setTitle(30).setCenter();
 
-		jcSearCh = new JComboBox<>();
-		jcSearCh.addItem("도서명");
-		jcSearCh.addItem("저자");
+		jcCombo = new BaseCombo("도서명", "저자");
 
 		jtSearch = new JTextField(10);
 		
+		jbSeatch = new JButton("검색");
 
 		jbSearch = new JButton("검색");
 
-		cols = new Vector<>();
-		cols.add("분류");
-
-		data = db.getData("SELECT d_name FROM 2023지방_2.division;");
-
-		dtm = new DefaultTableModel(data, cols);
-
-		table = new JTable(dtm);
-
-		scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(70, 80));
+		divisionData = DbManager.db.getData("SELECT d_name, d_no FROM 2023지방_2.division;");
 		
-		
-		book = db.getData("SELECT b_no, b_name FROM 2023지방_2.book;");
+		jLeftTable = new BaseTable(divisionData, 1,"분류","").setTable().pSize(140, 0);
 		
 		jp = new BasePanel().setGrid(0, 4, 10, 10);
+		jspCenter = new JScrollPane(jp);
 		
 		
-		for (int i = 0; i < book.size(); i++) {
-			BasePanel jpTmp = new BasePanel();
-			jpTmp.addChild();
-			jpTmp.jpTop.add(new imageLabel(null, "book/"+book.get(i).get(0), 200, 200));
-			jpTmp.jpBottom.add(new JLabel(book.get(i).get(1)));
-			jp.add(jpTmp);
-			jp.setBorder(5,5,5,5);
-			jp.setBorder(new LineBorder(Color.black));
-		}
-		bookScroll = new JScrollPane(jp);
 		
+		
+		
+		
+		
+			
 		
 	}
 
-	@Override
+
 	public void setDesign() {
 		// TODO Auto-generated method stub
 		jpTop.addChild();
 		jpTop.jpCenter.add(jlTitle);
 		jpTop.jpBottom.setFlowRight().add(new JLabel("검색"));
-		jpTop.jpBottom.add(jcSearCh);
+		jpTop.jpBottom.add(jcCombo);
 		jpTop.jpBottom.add(jtSearch);
 		jpTop.jpBottom.add(jbSearch);
 		
@@ -101,15 +94,15 @@ public class BookList extends BaseFrame {
 		jpCenter.addChild();
 		jpCenter.jpLeft.addChild();
 		
-		jpCenter.jpLeft.jpLeft.add(scroll);
+		jpCenter.jpLeft.jpLeft.add(jLeftTable);
 		
-		jpCenter.jpCenter.add(bookScroll);
+		jLeftTable.Table.changeSelection(0, 0, false, false);
 		
 		jpCenter.setBorder(10,10,10,10);
 		
-		jpBottom.setFlowRight().add(new JLabel("검색결과:"+ book.size()));
+//		jpBottom.setFlowRight().add(new JLabel("검색결과:"+ book.size()));
 		
-		
+		 
 		
 
 	}
@@ -117,31 +110,47 @@ public class BookList extends BaseFrame {
 	@Override
 	public void events() {
 		// TODO Auto-generated method stub
-		jbSearch.addActionListener(e -> {
-		jpCenter.jpCenter.removeAll();
-		jp.removeAll();
-		BasePanel jpTmp = new BasePanel();
-		String comboState = jcSearCh.getSelectedItem().toString();
 		
-		String searchTxt = jtSearch.getText();
+	}
+	
+	private void imageChange() {
+
+		int comboIndex = jcCombo.getSelectedIndex();
+		int tableIndex = jLeftTable.Table.getSelectedRow();
+
+		String name = "%";
+		String author = "%";
 		
-		if (comboState == "도서명") {
-			Vector<Vector<String>> size = db.getData("SELECT b_no, b_name FROM 2023지방_2.book where b_name = ?;", searchTxt);
-			for (int i = 0; i < size.size(); i++) {
-				jpTmp.addChild();
-				jpTmp.jpTop.add(new imageLabel(null, "book/"+ size.get(i).get(0), 200, 200));
-				jpTmp.jpBottom.add(new JLabel(size.get(i).get(1)));
-				
-				jp.add(jpTmp);
-				bookScroll = new JScrollPane(jp);
-				jpCenter.jpCenter.add(bookScroll);
-				
-			}
-			
+//		String comboValue = divisionData.get(comboIndex).get(0);
+		String division = jLeftTable.data.get(tableIndex).get(1);
+		String search = jtSearch.getText().trim();
+		
+		if (comboIndex == 0) {
+			name = search.replaceAll(" ","");
+		} else {
+			author = search.replaceAll(" ", "");
 		}
 		
-		});
-
+		
+		Vector<ImageModel> data = db.getImageData("select d.d_name,  d.d_no,  b.b_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\\r\\n\"\r\n"
+				+ "				+ \"join division as d\\r\\n\"\r\n"
+				+ "				+ \"	on b.d_no = d.d_no\\r\\n\"\r\n"
+				+ "				+ \"    join rental as r \\r\\n\"\r\n"
+				+ "				+ \"    on b.b_no = r.b_no\\r\\n\"\r\n"
+				+ "				+ \"	where d.d_no like \\\"%\\\" \\r\\n\"\r\n"
+				+ "				+ \"    group by b.b_no\\r\\n\"\r\n"
+				+ "				+ \"    \\r\\n\"\r\n"
+				+ "				+ \"    order by count(b.b_no) desc, b.b_no;", 1, division, name, author);
+	if (data.size() == 0) {
+		message.error("검색결과가 없습니다.");
+		jLeftTable.Table.changeSelection(0, 0, false, false);
+		jtSearch.setText("");
+		imageChange();
+		return;
 	}
+	
+	}
+	
+	
 
 }

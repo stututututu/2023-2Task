@@ -1,0 +1,48 @@
+package base.comp;
+
+import java.util.Vector;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import db.DbManager;
+
+public class BaseTable extends Vector<Object> {
+
+	public Vector cols;
+	private JScrollPane scroll;
+	private Vector<Vector<String>> data;
+	private JTable Table;
+
+	public BaseTable() {
+		// TODO Auto-generated constructor stub
+	}
+	public BaseTable(Object...val) {
+		// TODO Auto-generated constructor stub
+		
+		cols = new Vector<>();
+		for (Object vals : val) {
+			cols.add(vals);
+			
+		}
+	}
+
+	public Vector<Vector<String>> getTableData(String sql) {
+		// TODO Auto-generated method stub
+		
+		data = DbManager.db.getData(sql);
+		
+		return null;
+	}
+
+	public JScrollPane addScroll() {
+		// TODO Auto-generated method stub
+		Table = new JTable(data,cols);
+		
+		scroll = new JScrollPane(Table);
+		
+		return null;
+	}
+
+	
+}
