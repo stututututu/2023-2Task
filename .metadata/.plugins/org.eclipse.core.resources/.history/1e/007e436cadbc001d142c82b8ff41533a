@@ -1,7 +1,0 @@
-package base.comp;
-
-import java.util.Vector;
-
-public class BaseTable extends Vector<Object> {
-
-}

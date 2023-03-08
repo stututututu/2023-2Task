@@ -14,12 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import base.comp.BaseCombo;
 import base.comp.BaseFrame;
 import base.comp.BasePanel;
-import base.comp.BaseTable;
+import base.comp.BaseTableRe;
 import base.comp.imageLabel;
 import base.comp.message;
 import db.DbManager;
@@ -39,7 +38,7 @@ public class BookList extends BaseFrame {
 	private BasePanel jp;
 	private JScrollPane bookScroll;
 	public Vector<Vector<String>> divisionData;
-	private BaseTable jLeftTable;
+	private BaseTableRe jLeftTable;
 	private JScrollPane jspCenter;
 	private BaseCombo jcCombo;
 	private JButton jbSeatch;
@@ -65,7 +64,7 @@ public class BookList extends BaseFrame {
 
 		divisionData = DbManager.db.getData("SELECT d_name, d_no FROM 2023지방_2.division;");
 		
-		jLeftTable = new BaseTable(divisionData, 1,"분류","").setTable().pSize(140, 0);
+		jLeftTable = new BaseTableRe(divisionData,1, "분류","").pSize(80, 0);
 		
 		jp = new BasePanel().setGrid(0, 4, 10, 10);
 		jspCenter = new JScrollPane(jp);
@@ -92,9 +91,9 @@ public class BookList extends BaseFrame {
 		
 		
 		jpCenter.addChild();
-		jpCenter.jpLeft.addChild();
 		
-		jpCenter.jpLeft.jpLeft.add(jLeftTable);
+		jpCenter.jpLeft.add(jLeftTable);
+		jpCenter.jpCenter.add(jspCenter);
 		
 		jLeftTable.Table.changeSelection(0, 0, false, false);
 		
@@ -110,6 +109,9 @@ public class BookList extends BaseFrame {
 	@Override
 	public void events() {
 		// TODO Auto-generated method stub
+		jbSearch.addActionListener(e -> {
+			imageChange();
+		});
 		
 	}
 	
@@ -133,14 +135,14 @@ public class BookList extends BaseFrame {
 		
 		
 		Vector<ImageModel> data = db.getImageData("select d.d_name,  d.d_no,  b.b_name,  b.b_img, b.b_author, b.b_exp from 2023지방_2.book as b\\r\\n\"\r\n"
-				+ "				+ \"join division as d\\r\\n\"\r\n"
-				+ "				+ \"	on b.d_no = d.d_no\\r\\n\"\r\n"
-				+ "				+ \"    join rental as r \\r\\n\"\r\n"
-				+ "				+ \"    on b.b_no = r.b_no\\r\\n\"\r\n"
-				+ "				+ \"	where d.d_no like \\\"%\\\" \\r\\n\"\r\n"
-				+ "				+ \"    group by b.b_no\\r\\n\"\r\n"
-				+ "				+ \"    \\r\\n\"\r\n"
-				+ "				+ \"    order by count(b.b_no) desc, b.b_no;", 1, division, name, author);
+				+ "				+ \"join division as d\r\n"
+				+ "				+ \"	on b.d_no = d.d_no\r\n"
+				+ "				+ \"    join rental as r\r\n"
+				+ "				+ \"    on b.b_no = r.b_no\r\n"
+				+ "				+ \"	where d.d_no like ?\r\n"
+				+ "						and raplace(b.b_name,' ','') like concat('%', ? '%')"
+				+ "						and raplace(b.b_author, ' ', '') like concat('%', ?, '%')"
+				+ "				+ \"    group by b.b_no; ", 3, division, name, author);
 	if (data.size() == 0) {
 		message.error("검색결과가 없습니다.");
 		jLeftTable.Table.changeSelection(0, 0, false, false);
@@ -148,7 +150,14 @@ public class BookList extends BaseFrame {
 		imageChange();
 		return;
 	}
+	for (ImageModel image: data) {
+		String title = image.getData().get(2);
+//		jp.jpBottom.add(title);
+		
+		
+	}
 	
+	jp.addChild();
 	}
 	
 	

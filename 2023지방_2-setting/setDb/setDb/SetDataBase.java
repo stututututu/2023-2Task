@@ -137,11 +137,11 @@ public class SetDataBase {
 					+ "SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;\r\n"
 					+ "");
 			db.setData("set global local_infile = 1;");
-//			db.setData("load data local infile './datafiles/user.txt' into table user ignore 1 lines;");
-//			db.setData("load data local infile './datafiles/division.txt' into table division ignore 1 lines;");
-//			db.setData("load data local infile './datafiles/book.txt' into table book ignore 1 lines;");
-//			db.setData("load data local infile './datafiles/likebook.txt' into table likebook ignore 1 lines;");
-//			db.setData("load data local infile './datafiles/rental.txt' into table rental ignore 1 lines;");
+			db.setData("load data local infile './datafiles/user.txt' into table user ignore 1 lines;");
+			db.setData("load data local infile './datafiles/division.txt' into table division ignore 1 lines;");
+			db.setData("load data local infile './datafiles/book.txt' into table book ignore 1 lines;");
+			db.setData("load data local infile './datafiles/likebook.txt' into table likebook ignore 1 lines;");
+			db.setData("load data local infile './datafiles/rental.txt' into table rental ignore 1 lines;");
 //			db.setData("load data local infile './datafiles/user.txt' into table user lines terminated by '\\r' ignore 1 lines;");
 //			db.setData("load data local infile './datafiles/division.txt' into table division lines terminated by '\\r' ignore 1 lines;");
 //			db.setData("load data local infile './datafiles/book.txt' into table book lines terminated by '\\r\\n' ignore 1 lines;");

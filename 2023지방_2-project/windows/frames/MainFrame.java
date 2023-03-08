@@ -86,7 +86,8 @@ public class MainFrame extends BaseFrame {
 			new SignUpFrame();
 		});
 		jbBookList.addActionListener(e -> {
-			new BookList();
+//			new BookListReMake();
+			new BookListRe();
 		});
 		jcTop.addActionListener(e -> {
 			gridChange();
