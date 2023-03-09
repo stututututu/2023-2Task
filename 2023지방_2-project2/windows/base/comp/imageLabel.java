@@ -13,6 +13,7 @@ public class imageLabel extends JLabel {
 	public imageLabel(String title, String path, int w, int d) {
 		// TODO Auto-generated constructor stub
 		super(title);
+//		ImageIcon icon = new ImageIcon(path);
 		ImageIcon icon = new ImageIcon("./datafiles/" + path + ".jpg");
 
 		Image img = icon.getImage();
@@ -33,6 +34,13 @@ public class imageLabel extends JLabel {
 
 		super.setIcon(new ImageIcon(img));
 
+	}
+	public imageLabel onlyImg() {
+		
+		
+		
+		
+		return this;
 	}
 
 	public imageLabel setCenter() {
@@ -60,7 +68,6 @@ public class imageLabel extends JLabel {
 
 	public imageLabel setbottom() {
 		// TODO Auto-generated method stub
-		super.setHorizontalTextPosition(JLabel.BOTTOM);
 		super.setVerticalTextPosition(JLabel.BOTTOM);
 		return this;
 
@@ -72,6 +79,5 @@ public class imageLabel extends JLabel {
 		return this;
 
 	}
-
 
 }

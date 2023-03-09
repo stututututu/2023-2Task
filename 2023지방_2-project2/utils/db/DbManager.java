@@ -14,22 +14,17 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
-
 import image.ImageModel;
 
 public class DbManager {
 
-	private String url = "jdbc:mysql://localhost/2023지방_2?"
-			+ "CharacterEncoding=UTF-8&"
-			+ "serverTimezone=UTC&"
-			+ "allowPublicKeyRetrieval=true&"
-			+ "allowLoadLocalInfile=true&"
-			+ "allowMultiQueries=true&";
+	private String url = "jdbc:mysql://localhost/2023지방_2?" + "CharacterEncoding=UTF-8&" + "serverTimezone=UTC&"
+			+ "allowPublicKeyRetrieval=true&" + "allowLoadLocalInfile=true&" + "allowMultiQueries=true&";
 	private String id = "root";
 	private String pw = "1234";
 	private Connection con;
 	private PreparedStatement pstmt;
-	
+
 	public static DbManager db = new DbManager();
 
 	public DbManager() {
@@ -70,50 +65,70 @@ public class DbManager {
 		try {
 			pstmt = con.prepareStatement(sql);
 			for (int i = 0; i < val.length; i++) {
-				pstmt.setObject(i+1, val[i]);
+				pstmt.setObject(i + 1, val[i]);
 			}
 			ResultSet rs = pstmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			while (rs.next()) {
 				Vector<String> row = new Vector<>();
 				for (int i = 0; i < rsmd.getColumnCount(); i++) {
-					row.add(rs.getString(i+1));
+					row.add(rs.getString(i + 1));
 				}
-				
+
 				data.add(row);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.out.println("GetData Faild");
 			return null;
-			
+
 		}
 
 		return data;
 	}
-	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object...val) {
-		// TODO Auto-generated constructor stub
 	
+	
+	
+	// 1. 안되는 이유 3가지 피드백 줌.
+	//	-> 내 코드가 절대 정답이 아니다
+	//		-> 코드는 그때마다 달라진다.
+	//		-> 이유? 그때마다 생각이 달라지기 때문에!
+	//		-> 만들 때 전 파일이랑 같은 경우가 많이 없음.
+	
+	// 2. 안되는거를 생각해서 역추적함. -> 역추적으로 인하여 내가 원하는 데이터가 맞는지 살펴봄.
+	// 3. 단계별 실행 후 피드백.
+	
+	
+	// 단체 줌.
+	// 
+	
+	
+	// 이따 잔체 줌 하기 전에 
+		// 1, 2, 3을 잘 하려면 무엇을 해야할까를 생각해보기
+	
+	public Vector<ImageModel> getImageData(String sql, int imageColIndex, Object... val) {
+		// TODO Auto-generated constructor stub
+
 		Vector<ImageModel> data = new Vector<ImageModel>();
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 
 			int cnt = 1;
 			for (int i = 0; i < val.length; i++) {
-				pstmt.setObject(i+1,val[i]);
+				pstmt.setObject(i + 1, val[i]);
 			}
 
 			ResultSet rs = pstmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				Vector<String> row = new Vector<String>();
 
 				for (int i = 0; i < rsmd.getColumnCount(); i++) {
-					row.add(rs.getObject(i+1) + "");
+					row.add(rs.getObject(i + 1) + "");
 				}
 
 				// blob 이미지 불러오기
@@ -126,20 +141,17 @@ public class DbManager {
 					e.printStackTrace();
 				}
 
-				
 				ImageModel model = new ImageModel(row, icon);
 
 				data.add(model);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return data;
 	}
-	
-	
+
 }

@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="public"/>
+		<item key="selection" value="?"/>
 		<list key="findhistory">
+			<item value="&apos;asd&apos;"/>
+			<item value="tImg() {"/>
 			<item value="private"/>
 			<item value="lines"/>
 			<item value="terminated by &apos;\\r&apos;"/>
@@ -15,9 +17,9 @@
 			<item value="&apos;d&apos;"/>
 		</list>
 		<list key="replacehistory">
-			<item value="public"/>
-			<item value=""/>
 			<item value="?"/>
+			<item value=""/>
+			<item value="public"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

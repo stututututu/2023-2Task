@@ -2,10 +2,12 @@ package base.comp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -41,9 +43,17 @@ public class BasePanel extends JPanel {
 		super.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		return this;
 	}
+
 	public BasePanel setLine(String title) {
 		super.setBorder(new TitledBorder(new LineBorder(Color.black), title));
 		return this;
+	}
+
+	public BasePanel setBorder(int t, int l, int b, int r) {
+		// TODO Auto-generated method stub
+		super.setBorder(new EmptyBorder(t, l, b, r));
+		return this;
+
 	}
 
 	public BasePanel addChild() {
@@ -51,15 +61,14 @@ public class BasePanel extends JPanel {
 		jpBottom = new BasePanel();
 		jpCenter = new BasePanel();
 		jpLeft = new BasePanel();
-		jpRight  = new BasePanel();
-		
+		jpRight = new BasePanel();
+
 		super.add(jpTop, BorderLayout.NORTH);
 		super.add(jpBottom, BorderLayout.SOUTH);
 		super.add(jpCenter, BorderLayout.CENTER);
 		super.add(jpLeft, BorderLayout.WEST);
 		super.add(jpRight, BorderLayout.EAST);
-		
-		
+
 		return this;
 	}
 
