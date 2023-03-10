@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="?"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="+"/>
 			<item value="&apos;asd&apos;"/>
 			<item value="tImg() {"/>
 			<item value="private"/>
@@ -17,8 +18,8 @@
 			<item value="&apos;d&apos;"/>
 		</list>
 		<list key="replacehistory">
-			<item value="?"/>
 			<item value=""/>
+			<item value="?"/>
 			<item value="public"/>
 		</list>
 	</section>

@@ -1,9 +1,0 @@
-package frames;
-
-public class SignUpFrame {
-
-	public SignUpFrame() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

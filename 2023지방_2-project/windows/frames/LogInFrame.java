@@ -91,7 +91,7 @@ public class LogInFrame extends BaseFrame{
 				message.error("3회 초과");
 				dispose();
 			}
-			if (id == "admin" && pw == "1234") {
+			if (id.equals("admin") && pw.equals("1234")) {
 				model.LogState.add("관리자");
 				dispose();
 				return;
