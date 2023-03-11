@@ -27,7 +27,6 @@ public class imageLabel extends JLabel {
 	public imageLabel(String title, ImageIcon icon, int w, int h) {
 		// TODO Auto-generated constructor stub
 		super(title);
-
 		Image img = icon.getImage();
 
 		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
@@ -46,6 +45,7 @@ public class imageLabel extends JLabel {
 	public imageLabel setCenter() {
 		// TODO Auto-generated method stub
 		super.setHorizontalAlignment(JLabel.CENTER);
+		super.setVerticalAlignment(JLabel.CENTER);
 		return this;
 	}
 
@@ -69,6 +69,7 @@ public class imageLabel extends JLabel {
 	public imageLabel setbottom() {
 		// TODO Auto-generated method stub
 		super.setVerticalTextPosition(JLabel.BOTTOM);
+		super.setHorizontalAlignment(JLabel.CENTER);
 		return this;
 
 	}

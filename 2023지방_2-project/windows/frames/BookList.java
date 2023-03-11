@@ -95,7 +95,7 @@ public class BookList extends BaseFrame {
 		jpCenter.jpLeft.add(jLeftTable);
 		jpCenter.jpCenter.add(jspCenter);
 		
-		jLeftTable.Table.changeSelection(0, 0, false, false);
+//		jLeftTable.Table.changeSelection(0, 0, false, false);
 		
 		jpCenter.setBorder(10,10,10,10);
 		
@@ -118,13 +118,13 @@ public class BookList extends BaseFrame {
 	private void imageChange() {
 
 		int comboIndex = jcCombo.getSelectedIndex();
-		int tableIndex = jLeftTable.Table.getSelectedRow();
+//		int tableIndex = jLeftTable.Table.getSelectedRow();
 
 		String name = "%";
 		String author = "%";
 		
 //		String comboValue = divisionData.get(comboIndex).get(0);
-		String division = jLeftTable.data.get(tableIndex).get(1);
+//		String division = jLeftTable.data.get(tableIndex).get(1);
 		String search = jtSearch.getText().trim();
 		
 		if (comboIndex == 0) {
@@ -145,7 +145,7 @@ public class BookList extends BaseFrame {
 				+ "				+ \"    group by b.b_no; ", 3, division, name, author);
 	if (data.size() == 0) {
 		message.error("검색결과가 없습니다.");
-		jLeftTable.Table.changeSelection(0, 0, false, false);
+//		jLeftTable.Table.changeSelection(0, 0, false, false);
 		jtSearch.setText("");
 		imageChange();
 		return;

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="model.res"/>
-    <fullyQualifiedTypeName name="data.DataManager"/>
-    <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ"/>
-    <fullyQualifiedTypeName name="frames.BaseLabel"/>
-    <fullyQualifiedTypeName name="base.comp.BaseTable"/>
     <fullyQualifiedTypeName name="base.comp.BaseTableRe"/>
     <fullyQualifiedTypeName name="frames.BookListReMake"/>
     <fullyQualifiedTypeName name="base.comp.BaseCombo"/>
@@ -17,13 +12,10 @@
     <fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
-    <fullyQualifiedTypeName name="image.ImageModel"/>
     <fullyQualifiedTypeName name="java.util.PrimitiveIterator.OfDouble"/>
-    <fullyQualifiedTypeName name="base.comp.imageLabel"/>
     <fullyQualifiedTypeName name="model.model"/>
     <fullyQualifiedTypeName name="com.sun.crypto.provider.KeyGeneratorCore.ChaCha20KeyGenerator"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm"/>
-    <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
     <fullyQualifiedTypeName name="db.DbManager"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="com.sun.tools.classfile.StackMap_attribute.stack_map_frame"/>
@@ -33,17 +25,13 @@
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="com.mysql.cj.protocol.Message"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="base.comp.message"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
     <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="java.awt.event.ComponentAdapter"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
-    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
     <fullyQualifiedTypeName name="base.comp.BasePanel"/>
@@ -51,13 +39,25 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="jdk.tools.jlink.resources.jlink"/>
     <fullyQualifiedTypeName name="base.comp.imageLable"/>
+    <fullyQualifiedTypeName name="java.awt.Font"/>
+    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="sun.jvm.hotspot.tools.SysPropsDumper"/>
+    <fullyQualifiedTypeName name="javax.management.remote.SubjectDelegationPermission"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="base.comp.BaseFrame"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="javax.swing.JPasswordField"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
-    <fullyQualifiedTypeName name="java.awt.Font"/>
-    <fullyQualifiedTypeName name="jdbc.Dbmanager"/>
-    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
-    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="base.comp.BaseLable"/>
+    <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+    <fullyQualifiedTypeName name="base.comp.message"/>
+    <fullyQualifiedTypeName name="image.ImageModel"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="base.comp.imageLabel"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.jdbc.SuspendableXAConnection"/>
+    <fullyQualifiedTypeName name="jdbc.Dbmanager"/>
 </qualifiedTypeNameHistroy>

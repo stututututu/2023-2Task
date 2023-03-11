@@ -131,11 +131,11 @@ public class MainFrame extends BaseFrame {
 
 			});
 
-			author = DataManager.subString(author, 13, "");
-			exp = DataManager.subString(exp, 13, "");
+//			author = DataManager.subString(author, 13, "");
+//			exp = DataManager.subString(exp, 13, "");
 
-			String toolTipText = "<html>" + "저자 : " + author + "<br/>" + "설명 : " + exp + "</html>";
-			jlImg.setToolTipText(toolTipText);
+//			String toolTipText = "<html>" + "저자 : " + author + "<br/>" + "설명 : " + exp + "</html>";
+//			jlImg.setToolTipText(toolTipText);
 
 			jpCenter.jpCenter.add(jlImg);
 

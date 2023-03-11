@@ -26,7 +26,7 @@ public class MainFrame extends BaseFrame{
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
-		super.BaseFrame("메인", 958, 720);
+		super.BaseFrame("메인", 958, 720, null);
 	}
 
 	@Override
@@ -75,6 +75,21 @@ public class MainFrame extends BaseFrame{
 		jbLogIn.addActionListener(e -> {
 			new LogInFrame(this)	;
 		});
+		jbSignUp.addActionListener(e -> {
+			new SignUpFrame(this);
+		});
+		
+		jbEnd.addActionListener(e -> {
+			super.close(); 
+		});
+		jcAll.addActionListener(e -> {
+			imageChange();
+		});
+	}
+
+	private void imageChange() {
+		// TODO Auto-generated method stub
+		Vector<Vector<String>> data = Dbmanager.db.getData("");
 	}
 
 	public void logInState() {

@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -85,6 +86,12 @@ public class MainFrame extends BaseFrame {
 		jbEnd.addActionListener(e -> {
 			dispose();
 		});
+		jcBook.addActionListener(e -> {
+			jpCenter.jpCenter.removeAll();
+			imgChange();
+			super.refresh();
+			
+		});
 	}
 
 	private void imgChange() {
@@ -127,14 +134,14 @@ public class MainFrame extends BaseFrame {
 
 //			System.out.println(no + " " + title);
 //			
-////			System.out.println(img.getIcon());
-
+			
+			System.out.println(no);
 			JLabel jltmp = new JLabel();
 			jltmp.setIcon(img.getIcon());
 
-			jcImg = new imageLabel(title, img.getIcon(), 150, 180).setbottom().setLine().setCenter().setTitle(14);
+			jcImg = new imageLabel(title, "book/"+no, 150, 180).setbottom().setLine().setCenter().setTitle(14);
 			
-			jpCenter.jpCenter.add(jcImg);
+			jpCenter.jpCenter.add(jcImg); 
 		}
 
 		super.refresh();

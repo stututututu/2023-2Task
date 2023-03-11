@@ -1,8 +1,11 @@
 package frames;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -10,7 +13,6 @@ import javax.swing.JTextField;
 import base.comp.BaseFrame;
 import base.comp.BaseLable;
 import base.comp.message;
-import db.DbManager;
 import jdbc.Dbmanager;
 import model.model;
 
@@ -25,7 +27,7 @@ public class LogInFrame extends BaseFrame{
 	public LogInFrame(MainFrame mainFrame) {
 		// TODO Auto-generated constructor stub
 		this.mainFrame = mainFrame;
-		super.BaseFrame("로그인", 373, 219);
+		super.BaseFrame("로그인", 373, 219, mainFrame);
 	}
 
 
@@ -69,39 +71,47 @@ public class LogInFrame extends BaseFrame{
 		jbLogIn.addActionListener(e -> {
 			String id = jtId.getText();
 			String pw = jtPw.getText();
-			int cnt = 0;
 			Vector<Vector<String>> check =Dbmanager.db.getData("SELECT * FROM 2023지방_2.user where u_id = ? and u_pw = ?;", id, pw);
 			
-			if (id.isBlank() || pw.isBlank()) {
-				message.error("빈칸이 있습니다.");
-				cnt++;
-				return;
-			}
-			
-			if (check.size() == 0) {
-				message.error("아이디 또는 비밀번호를 확인하세요.");
-				jtId.setText("");
-				jtPw.setText("");
-				jtId.requestFocus();
-				cnt++;
-				return;
+			int cnt = 0;
 				
-			}
-			if (cnt >= 3) {
-				message.error("3회 초과");
-				dispose();
-			}
 			if (id.equals("admin") && pw.equals("1234")) {
-				model.LogState.add("관리자");
 				dispose();
 				return;
 			}
+			if (check.size() != 0) {
+				model.LogState = check.get(0);
+				mainFrame.logInState();
+				super.close();
+				return;
+			}
+			if (id.isBlank() || pw.isBlank()) {
+				cnt++;
+				message.error("빈칸이 있습니다.");
+				return;
+			}
+			if (cnt >= 2) {
+				message.error("3회 초과");
+				super.close();
+			}
+			System.out.println(cnt);
+			cnt++;
+			message.error("아이디 또는 비밀번호를 확인하세요.");
+			jtId.setText("");
+			jtPw.setText("");
+			jtId.requestFocus();
 			
-			model.LogState = check.get(0);
-			mainFrame.logInState();
-			dispose();
 		});
 		
+//		super.addWindowListener(new WindowAdapter() {
+//		
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//				// TODO Auto-generated method stub
+//				super.windowClosing(e);
+//				dispose();
+//			}
+//		});
 	}
 
 }
