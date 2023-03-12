@@ -1,5 +1,6 @@
 package jdbc;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Vector;
+
+import javax.swing.ImageIcon;
+
+import models.ImageDataModel;
 
 public class Dbmanager {
 
@@ -82,4 +87,42 @@ public class Dbmanager {
 		}
 		return data;
 	}
+
+public ImageDataModel getImageData(String sql , int imageColIndex, Object...val){
+	Vector<Vector<String>> datas = new Vector<>();
+	Vector<ImageIcon> icons = new Vector<>();
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		for (int i = 0; i < val.length; i++) {
+			pstmt.setObject(i+1, val[i]);
+			
+		}
+		ResultSet rs = pstmt.executeQuery();
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		while (rs.next()) {
+			
+			Vector<String> row = new Vector<>();
+			
+			for (int i = 0; i < rsmd.getColumnCount(); i++) {
+				row.add(rs.getObject(i+1)+"");
+			}
+			
+			datas.add(row);
+			
+			Blob blob = rs.getBlob(imageColIndex + 1);
+			
+			icons.add(new ImageIcon(blob.getBinaryStream().readAllBytes()));
+			
+		}
+		
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.println("GetData Faild");
+		return null;
+	}
+	return new ImageDataModel(datas, icons);
+}
 }

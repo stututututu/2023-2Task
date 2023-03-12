@@ -119,19 +119,25 @@ public class SetDataBase {
 				+ "    ON UPDATE NO ACTION)\r\n"
 				+ "ENGINE = InnoDB;\r\n"
 				+ ""
-				+ "set global local_infile = true;"
-				+ ""
-				+ "load data local infile './datafiles/user.txt' into table 2023지방_2.user lines terminated by '\\r' ignore 1 lines; \r\n"
-				+ "load data local infile './datafiles/division.txt' into table 2023지방_2.division lines terminated by '\\r' ignore 1 lines; \r\n"
-				+ "load data local infile './datafiles/book.txt' into table 2023지방_2.book lines terminated by '\\r\\n' ignore 1 lines; \r\n"
-				+ "load data local infile './datafiles/likebook.txt' into table 2023지방_2.likebook lines terminated by '\\r' ignore 1 lines; \r\n"
-				+ "load data local infile './datafiles/rental.txt' into table 2023지방_2.rental lines terminated by '\\r' ignore 1 lines; \r\n"
+//				+ "set global local_infile = true;"
+//				+ ""
+//				+ "load data local infile './datafiles/user.txt' into table 2023지방_2.user lines terminated by '\\r' ignore 1 lines; \r\n"
+//				+ "load data local infile './datafiles/division.txt' into table 2023지방_2.division lines terminated by '\\r' ignore 1 lines; \r\n"
+//				+ "load data local infile './datafiles/book.txt' into table 2023지방_2.book lines terminated by '\\r\\n' ignore 1 lines; \r\n"
+//				+ "load data local infile './datafiles/likebook.txt' into table 2023지방_2.likebook lines terminated by '\\r' ignore 1 lines; \r\n"
+//				+ "load data local infile './datafiles/rental.txt' into table 2023지방_2.rental lines terminated by '\\r' ignore 1 lines; \r\n"
 				+ ""
 				+ "drop user if exists 'user'@'localhost';\r\n"
 				+ "create user 'user'@'localhost' identified by '1234';\r\n"
 				+ "grant insert, delete, update, select on 2023지방_2.* to 'user'@'localhost';"
 				+ ""
 				+ "");
+		Dbmanager.db.setData("set global local_infile = true;");
+		Dbmanager.db.setData("load data local infile './datafiles/user.txt' into table 2023지방_2.user lines terminated by '\\r' ignore 1 lines; \r\n"
+				+ "load data local infile './datafiles/division.txt' into table 2023지방_2.division lines terminated by '\\r' ignore 1 lines; \r\n"
+				+ "load data local infile './datafiles/book.txt' into table 2023지방_2.book lines terminated by '\\r\\n' ignore 1 lines; \r\n"
+				+ "load data local infile './datafiles/likebook.txt' into table 2023지방_2.likebook lines terminated by '\\r' ignore 1 lines; \r\n"
+				+ "load data local infile './datafiles/rental.txt' into table 2023지방_2.rental lines terminated by '\\r' ignore 1 lines; \r\n");
 		
 		int result1 = 0;
 		

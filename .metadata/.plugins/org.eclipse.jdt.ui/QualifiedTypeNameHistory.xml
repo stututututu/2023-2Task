@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="base.comp.BaseTableRe"/>
     <fullyQualifiedTypeName name="frames.BookListReMake"/>
     <fullyQualifiedTypeName name="base.comp.BaseCombo"/>
     <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
@@ -17,10 +16,8 @@
     <fullyQualifiedTypeName name="com.sun.crypto.provider.KeyGeneratorCore.ChaCha20KeyGenerator"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm"/>
     <fullyQualifiedTypeName name="db.DbManager"/>
-    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="com.sun.tools.classfile.StackMap_attribute.stack_map_frame"/>
     <fullyQualifiedTypeName name="setting.SetDataBase"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="com.mysql.cj.protocol.Message"/>
@@ -31,7 +28,6 @@
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="java.awt.event.ComponentAdapter"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.border.TitledBorder"/>
     <fullyQualifiedTypeName name="base.comp.BasePanel"/>
@@ -55,9 +51,13 @@
     <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
     <fullyQualifiedTypeName name="base.comp.message"/>
     <fullyQualifiedTypeName name="image.ImageModel"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
-    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="base.comp.imageLabel"/>
     <fullyQualifiedTypeName name="com.mysql.cj.jdbc.SuspendableXAConnection"/>
     <fullyQualifiedTypeName name="jdbc.Dbmanager"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="models.ImageDataModel"/>
 </qualifiedTypeNameHistroy>
