@@ -1,7 +1,7 @@
-INDEX VERSION 1.131+/Users/stututu/2023ì§€ë°©_2ê³¼ì œ/.metadata/.plugins/org.eclipse.jdt.core
-595661157.index
-2967903562.index
-2225468.index
-2470869267.index
-2355949598.index
-4218142856.index
+INDEX VERSION 1.131+C:\Users\±èÁØ¿ì\eclipse-2023Áö¹æ_2\.metadata\.plugins\org.eclipse.jdt.core
+3921144060.index
+2662389866.index
+1809895780.index
+3061359557.index
+113232819.index
+3676813586.index

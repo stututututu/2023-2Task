@@ -14,4 +14,20 @@ public class ImageDataModel {
 		this.icons = icons;
 	}
 
+	public Vector<Vector<String>> getDatas() {
+		return datas;
+	}
+
+	public void setDatas(Vector<Vector<String>> datas) {
+		this.datas = datas;
+	}
+
+	public Vector<ImageIcon> getIcons() {
+		return icons;
+	}
+
+	public void setIcons(Vector<ImageIcon> icons) {
+		this.icons = icons;
+	}
+
 }

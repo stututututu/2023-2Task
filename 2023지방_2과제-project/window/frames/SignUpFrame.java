@@ -68,6 +68,9 @@ public class SignUpFrame extends BaseFrame
 			String idPattern = "^(.*[a-zA-Z])$";
 			boolean idRs = Pattern.matches(idPattern, id);
 			
+			String StringCk = "^.*.(.)(\\1)*$";
+			boolean StringRs = Pattern.matches(StringCk, pw);
+			
 			Vector<Vector<String>> check = Dbmanager.db.getData("SELECT * FROM 2023지방_2.user where u_id = ?;", id);
 			
 			if (name.isBlank() || id.isBlank() || pw.isBlank()) {
@@ -86,8 +89,12 @@ public class SignUpFrame extends BaseFrame
 				message.error("비밀번호 형식이 일치하지 않습니다");
 				return;
 			}
+			if (StringRs) {
+				message.error("비밀번호는 연속된 글자가 올 수 없습니다.");
+			}
 			if (check.size() != 0 || id.equals("admin")) {
 				message.error("이미 있는 아이디 입니다.");
+				return;
 			}
 			
 			Dbmanager.db.setData("INSERT INTO `2023지방_2`.`user` (`u_name`, `u_id`, `u_pw`) VALUES (?, ?, ?);", name, id, pw);

@@ -1,9 +1,12 @@
 package frames;
 
+import java.util.Iterator;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.TitledBorder;
 
 import base.comp.BaseCombo;
 import base.comp.BaseFrame;
@@ -11,6 +14,7 @@ import base.comp.BasePanel;
 import base.comp.imageLable;
 import jdbc.Dbmanager;
 import model.model;
+import models.ImageDataModel;
 
 public class MainFrame extends BaseFrame{
 
@@ -23,10 +27,12 @@ public class MainFrame extends BaseFrame{
 	private JButton jbMyPage;
 	private JButton jbRead;
 	private JButton jbEnd;
+	private ImageDataModel data;
+	private imageLable jlImg;
 
 	public MainFrame() {
 		// TODO Auto-generated constructor stub
-		super.BaseFrame("메인", 958, 720, null);
+		super.BaseFrame("메인", 884, 731, null);
 	}
 
 	@Override
@@ -55,11 +61,8 @@ public class MainFrame extends BaseFrame{
 		jpCenter.jpTop.setFlowLeft().add(jcAll);
 		
 		
-		jpCenter.jpCenter.setGrid(1, 5, 10, 10).add(new imageLable("책이다.", 1, 180, 200).setline().setTextBottom());
-		jpCenter.jpCenter.add(new imageLable("책이다2.", 2, 180, 200).setline().setTextBottom());
-		jpCenter.jpCenter.add(new imageLable("책이다3.", 3, 180, 200).setline().setTextBottom());
-		jpCenter.jpCenter.add(new imageLable("책이다4.", 4, 180, 200).setline().setTextBottom());
-		jpCenter.jpCenter.add(new imageLable("책이다5.", 5, 180, 200).setline().setTextBottom());
+		jpCenter.jpCenter.setGrid(1, 5, 10, 10);
+		imageChange();
 		
 		jpBottom.setFlowCenter().add(jbLogIn);
 		jpBottom.add(jbSignUp);
@@ -84,12 +87,43 @@ public class MainFrame extends BaseFrame{
 		});
 		jcAll.addActionListener(e -> {
 			imageChange();
+			super.refresh();
+		});
+		jbBookList.addActionListener(e -> {
+			new BookListFrame(this);
 		});
 	}
 
 	private void imageChange() {
 		// TODO Auto-generated method stub
-		Vector<Vector<String>> data = Dbmanager.db.getData("");
+		jpCenter.jpCenter.removeAll();
+		String cNum = jcAll.getSelectedIndex() + "";
+		if (cNum.equals("0")) {
+			cNum = "%";
+		}
+		
+		System.out.println(cNum);
+
+		data = Dbmanager.db.getImageData("SELECT b.*, d.* FROM 2023지방_2.rental as r\r\n"
+				+ "				join 2023지방_2.book as b \r\n"
+				+ "                join 2023지방_2.division as d \r\n"
+				+ "                on r.b_no = b.b_no\r\n"
+				+ "				and b.d_no = d.d_no "
+				+ "				where d.d_no like ?\r\n"
+				+ "                group by r.b_no \r\n"
+				+ "				order by count(r.b_no) desc limit 5;", 7, cNum);
+		Vector<Vector<String>> datas = data.datas;
+		Vector<ImageIcon> icons = data.icons;
+		
+		for (int i = 0; i < 5; i++) {
+			String Title = datas.get(i).get(1);
+			
+			jlImg = new imageLable(Title, icons.get(i), 165, 170).setCenter().setTextBottom().setline().setTextSize(11);
+			
+			jpCenter.jpCenter.add(jlImg);
+		}
+		
+		super.refresh();
 	}
 
 	public void logInState() {

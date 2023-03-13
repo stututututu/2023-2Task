@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 
 public class ImageModel {
 
-	private Vector<String> data;
-	private ImageIcon icon;
+	public Vector<String> data;
+	public ImageIcon icon;
 
 	public ImageModel(Vector<String> data, ImageIcon icon) {
 		// TODO Auto-generated constructor stub

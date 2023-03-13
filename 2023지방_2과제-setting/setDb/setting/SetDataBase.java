@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Vector;
 
-import com.mysql.cj.protocol.Message;
-
 import base.comp.message;
 import jdbc.Dbmanager;
 

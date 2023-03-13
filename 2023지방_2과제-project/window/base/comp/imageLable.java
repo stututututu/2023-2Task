@@ -25,10 +25,9 @@ public class imageLable extends JLabel {
 		img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
 		super.setIcon(new ImageIcon(img));
 	}
-		public imageLable(String text, int path, int w, int h) {
+		public imageLable(String text, ImageIcon icon, int w, int h) {
 			// TODO Auto-generated constructor stub
 			super(text);
-			ImageIcon icon = new ImageIcon("./datafiles/book/"+ path + ".jpg");
 			Image img = icon.getImage();
 			
 			img = img.getScaledInstance(w, h, Image.SCALE_SMOOTH);
