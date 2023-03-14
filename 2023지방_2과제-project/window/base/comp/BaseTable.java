@@ -17,7 +17,12 @@ public class BaseTable extends JScrollPane {
 	public BaseTable(Vector<Vector<String>> datas, String... cols) {
 		// TODO Auto-generated constructor stub
 		this.datas = datas;
-
+		Vector<String> newData = new Vector<>();
+		newData.add("%");
+		newData.add("전체");
+		
+		datas.add(0,newData);
+		
 		Vector<String> col = new Vector<>();
 		for (int i = 0; i < cols.length; i++) {
 			col.add(cols[i]);
