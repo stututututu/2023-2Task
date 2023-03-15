@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import base.comp.BaseCombo;
 import base.comp.BaseFrame;
@@ -36,7 +37,7 @@ public class BookListFrame extends BaseFrame {
 
 	public BookListFrame(MainFrame mainFrame) {
 		// TODO Auto-generated constructor stub
-		super.BaseFrame("도서 목록", 766, 429, mainFrame);
+		super.BaseFrame("도서 목록", 1121, 602, mainFrame);
 	}
 
 	@Override
@@ -66,10 +67,14 @@ public class BookListFrame extends BaseFrame {
 		jpTop.jpBottom.add(jbSearch);
 		
 //		jpCenter.jpCenter.add(jpCenterGrid);
+		jLeftTable.jTable.changeSelection(0, 0, false, false);
 		imgSearch();
+		jpCenter.setBorder(15, 15, 15, 15);
 		
 		jpLeft.addChild();
 		jpLeft.jpLeft.add(jLeftTable);
+		
+		jpCenterGrid.setBorder(5, 5, 5, 5);
 
 	}
 
@@ -82,32 +87,44 @@ public class BookListFrame extends BaseFrame {
 		String b_name = "%";
 		String b_author= "%";
 		
-		if (comboIndex.equals("0")) {
+		if (jcSearch.getSelectedIndex() == 0) {
 			b_name = jtSearch.getText().replaceAll(" ", "");
 		} else {
 			b_author = jtSearch.getText().replaceAll(" ", "");
 		}
 		
-		
+		System.out.println(row);
+		if (row.equals("0")) {
+			row = "%";
+		}
 		
 		allData = Dbmanager.db.getImageData("SELECT * FROM 2023지방_2.book as b\r\n"
 				+ "\r\n"
 				+ "where replace(b.b_name, ' ', '') like concat('%', ?, '%')\r\n"
 				+ "and replace(b.b_author, ' ', '') like concat('%', ?, '%')\r\n"
 				+ "and b.d_no like ?;", 7, b_name, b_author ,row);
+		jCenterScroll.setViewportView(jpCenterGrid);
+		jpCenter.add(jCenterScroll);
 		
+		Vector<Vector<String>> datas = allData.datas;
+		Vector<ImageIcon> icons = allData.icons;
+
+		for (int i = 0; i < icons.size() ; i++) {
+			String title = datas.get(i).get(1);
+			
+			jpCenterGrid.setBorder(10, 10, 10, 10);
+			jpCenterGrid.add(new imageLable(title, icons.get(i), 160, 160).setline().setTextBottom().setCenter());
+			
+		}		
 		
-//		for (Vector<Vector<String>> datas : allData) {S
-//			
-//		}
-//		
-		
-		
+		super.refresh();
 	}
 
 	@Override
 	public void events() {
-		
+		jbSearch.addActionListener(e -> {
+			imgSearch();
+		});
 		
 	}
 

@@ -20,7 +20,6 @@
     <fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
     <fullyQualifiedTypeName name="jdk.tools.jlink.resources.jlink"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
-    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="sun.jvm.hotspot.tools.SysPropsDumper"/>
     <fullyQualifiedTypeName name="javax.management.remote.SubjectDelegationPermission"/>
@@ -48,7 +47,6 @@
     <fullyQualifiedTypeName name="base.comp.BaseTable"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-    <fullyQualifiedTypeName name="base.comp.imageLable"/>
     <fullyQualifiedTypeName name="models.ImageDataModel"/>
     <fullyQualifiedTypeName name="base.comp.BaseLable"/>
     <fullyQualifiedTypeName name="java.awt.Scrollbar"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="jdbc.Dbmanager"/>
     <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="base.comp.imageLable"/>
+    <fullyQualifiedTypeName name="javax.swing.border.EmptyBorder"/>
 </qualifiedTypeNameHistroy>
