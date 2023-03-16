@@ -6,7 +6,9 @@ import java.util.Vector;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
 
 public class BaseTable extends JScrollPane {
 
@@ -54,6 +56,14 @@ public class BaseTable extends JScrollPane {
 
 	public BaseTable pSize(int w, int d) {
 		super.setPreferredSize(new Dimension(w, d));
+		return this;
+	}
+	public BaseTable setCenter() {
+		DefaultTableCellRenderer dtcr =  new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		jTable.setDefaultRenderer(Object.class, dtcr);
+		
+		
 		return this;
 	}
 }
