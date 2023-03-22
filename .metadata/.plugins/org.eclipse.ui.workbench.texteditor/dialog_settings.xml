@@ -8,6 +8,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value=" = new BasePanel()"/>
 			<item value="+"/>
 			<item value="&apos;asd&apos;"/>
 			<item value="tImg() {"/>
