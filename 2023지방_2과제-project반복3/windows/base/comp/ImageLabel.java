@@ -1,9 +1,12 @@
 package base.comp;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 public class ImageLabel extends JLabel {
 
@@ -30,6 +33,39 @@ public class ImageLabel extends JLabel {
 		super.setIcon(new ImageIcon(img));
 		
 	}
+	public ImageLabel setCenter() {
+		// TODO Auto-generated method stub
+		super.setHorizontalAlignment(JLabel.CENTER);
+		super.setVerticalAlignment(JLabel.CENTER);
+		
+		return this;
+	}
+	public ImageLabel setTextCenter() {
+		// TODO Auto-generated method stub
+		super.setHorizontalTextPosition(JLabel.CENTER);
+		super.setVerticalTextPosition(JLabel.CENTER);
+		
+		return this;
+	}
+	public ImageLabel setTitle(int size) {
+		// TODO Auto-generated method stub
+		super.setForeground(Color.white);
+		super.setFont(new Font("HY헤드라인M", Font.PLAIN, size));
+		
+		return this;
+	}
+	public ImageLabel setTextBottom() {
+		// TODO Auto-generated method stub
+		super.setHorizontalTextPosition(JLabel.CENTER);
+		super.setVerticalTextPosition(JLabel.BOTTOM);
+		return this;
+	}
+	public ImageLabel setline() {
+		// TODO Auto-generated method stub
+		super.setBorder(new LineBorder(Color.black));
+		return this;
+	}
+	
 
 
 }

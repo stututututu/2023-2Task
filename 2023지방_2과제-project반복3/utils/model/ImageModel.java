@@ -6,10 +6,10 @@ import javax.swing.ImageIcon;
 
 public class ImageModel {
 
-	Vector<Vector<String>> datas;
-	Vector<ImageIcon> icons;
+	public Vector<Vector<String>> datas;
+	public Vector<ImageIcon> icons;
 
-	public ImageModel(Vector<Vector<String>> data, Vector<ImageIcon> icon) {
+	public ImageModel(Vector<Vector<String>> datas, Vector<ImageIcon> icons) {
 		this.datas = datas;
 		this.icons = icons;
 	}

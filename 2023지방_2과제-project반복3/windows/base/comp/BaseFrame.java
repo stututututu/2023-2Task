@@ -6,6 +6,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import design.IDesign;
@@ -19,6 +20,8 @@ public abstract class BaseFrame extends JFrame implements IDesign {
 	public BasePanel jpBottom = new BasePanel();
 	public BasePanel jpLeft = new BasePanel();
 	public BasePanel jpRight = new BasePanel();
+
+	private ImageIcon logo;
 
 	public void BaseFrame(String title, int w, int d, BaseFrame PreFrame) {
 		// TODO Auto-generated constructor stub
@@ -53,14 +56,16 @@ public abstract class BaseFrame extends JFrame implements IDesign {
 			}
 		});
 
+		logo = new ImageIcon("./datafiles/logo.png");
 		super.setTitle(title);
 		super.setSize(w, d);
 		super.setLocationRelativeTo(null);
+		super.setIconImage(logo.getImage());
 		super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		super.setVisible(true);
 	}
 
-	private void close() {
+	public BaseFrame close() {
 		// TODO Auto-generated method stub
 		if (PreFrame == null) {
 			System.exit(0);
@@ -68,6 +73,7 @@ public abstract class BaseFrame extends JFrame implements IDesign {
 		this.dispose();
 		PreFrame.setVisible(true);
 		PreFrame.setState(JFrame.NORMAL);
+		return this;
 
 	}
 

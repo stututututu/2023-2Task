@@ -68,7 +68,7 @@ public class DbCreat {
 				+ "-- Table `2023지방_2`.`user`\r\n"
 				+ "-- -----------------------------------------------------\r\n"
 				+ "CREATE TABLE IF NOT EXISTS `2023지방_2`.`user` (\r\n"
-				+ "  `u_no` INT(11) NOT NULL,\r\n"
+				+ "  `u_no` INT(11) NOT NULL AUTO_INCREMENT,\r\n"
 				+ "  `u_name` VARCHAR(5) NULL,\r\n"
 				+ "  `u_id` VARCHAR(10) NULL,\r\n"
 				+ "  `u_pw` VARCHAR(10) NULL,\r\n"
