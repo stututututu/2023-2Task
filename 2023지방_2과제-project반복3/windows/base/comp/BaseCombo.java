@@ -16,4 +16,11 @@ public class BaseCombo extends JComboBox<String>{
 		
 	}
 
+	public BaseCombo(String string, String string2) {
+		// TODO Auto-generated constructor stub
+		super.addItem(string);
+		super.addItem(string2);
+	}
+
+
 }

@@ -94,12 +94,15 @@ public class MainFrame extends BaseFrame {
 				+ " order by count(r.b_no) desc limit 5;", 7, colIndex);
 		Vector<Vector<String>> datas = imgData.datas;
 		Vector<ImageIcon> icons = imgData.icons;
+		
+		
 		for (int i = 0; i < 5; i++) {
 			
 			jlImg = new ImageLabel(datas.get(i).get(1), icons.get(i), 100, 120	).setCenter().setTextBottom().setline();
 			
 			jpCenter.jpCenter.add(jlImg);
 		}
+		
 		super.refresh();
 	}
 
@@ -138,6 +141,14 @@ public class MainFrame extends BaseFrame {
 			jpBottom.add(jbClose);
 			super.refresh();
 		});
+		jbBookList.addActionListener(e -> {
+			new BookList(this);
+
+//			new BookListPrac( this);
+		});
+		jbMyPage.addActionListener(e -> {
+			new myPageFrame(this);
+		});
 		
 	}
 	public void LogInState() {
@@ -145,6 +156,9 @@ public class MainFrame extends BaseFrame {
 		jpTop.removeAll();
 		jlTop = new ImageLabel(model.LogState.get(1)+"님 환영합니다.", "메인2", 950, 500).setCenter().setTextCenter().setTitle(30);
 		jbSignUp.setEnabled(false);
+		jbBookList.setEnabled(true);
+		jbMyPage.setEnabled(true);
+		jbReadBook.setEnabled(true);
 		jpTop.add(jlTop);
 		
 		jpBottom.setFlowCenter().add(jbLogOut);
