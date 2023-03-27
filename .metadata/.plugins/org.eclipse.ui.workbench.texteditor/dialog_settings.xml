@@ -9,6 +9,8 @@
 		<item key="selection" value="?"/>
 		<list key="findhistory">
 			<item value="&apos;asd&apos;"/>
+			<item value=" = new BasePanel();"/>
+			<item value="b-no"/>
 			<item value=" = new BasePanel()"/>
 			<item value="+"/>
 			<item value="tImg() {"/>
@@ -21,6 +23,7 @@
 		<list key="replacehistory">
 			<item value="?"/>
 			<item value=""/>
+			<item value="b_no"/>
 			<item value="public"/>
 		</list>
 	</section>
