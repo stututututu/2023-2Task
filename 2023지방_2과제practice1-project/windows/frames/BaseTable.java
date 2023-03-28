@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class BaseTable extends JScrollPane{
 
 	private Vector<Vector<String>> data;
-	private JTable jTable;
+	public JTable jTable;
 
 	public BaseTable(Vector<Vector<String>> divisionData, String...val) {
 		// TODO Auto-generated constructor stub
