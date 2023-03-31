@@ -49,4 +49,5 @@ public class BaseTable extends JScrollPane{
 		return this;
 	}
 
+
 }

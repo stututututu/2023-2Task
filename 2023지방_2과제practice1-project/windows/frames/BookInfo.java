@@ -68,21 +68,16 @@ public class BookInfo extends BaseFrame{
 		// TODO Auto-generated method stub
 		
 		jbBorrow.addActionListener(e -> {
-			Date now = new Date();
-			String returnDay = borrowCk.get(0).get(6);
-			int count = Integer.parseInt(data.get(4));
 			
 			
 			if (borrowCk.size() != 0) {
 				message.error("이미 대출 중인 도서입니다.");
 				return;
 			}
-//			if (now.after(returnDay)) {
-//				
-//			}
 			message.info("대출이 완료되었습니다.");
-			DbManager.db.setData("UPDATE `2023지방_2`.`book` SET `b_count` = ? WHERE (`b_no` = ?);\r\n"
-					+ "",count -= 1,data.get(0));
+			DbManager.db.setData("UPDATE `2023지방_2`.`book` SET `b_count` = b_count -1  WHERE (`b_no` = ?);\r\n"
+					+ "",data.get(0));
+			
 			
 		});
 		

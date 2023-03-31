@@ -85,6 +85,9 @@ public class MainFrame extends BaseFrame {
 		jbBookList.addActionListener(e -> {
 			new BookListFrame(this);
 		});
+		jbMyPage.addActionListener(e -> {
+			new MyPage(this);
+		});
 	}
 
 	private void imgeChange() {

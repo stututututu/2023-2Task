@@ -9,6 +9,7 @@ public class MainClass {
 //		new DbCreat();
 		new MainFrame();
 		
+		
 	}
 
 }

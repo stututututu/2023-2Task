@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="java.awt.event.ComponentAdapter"/>
-    <fullyQualifiedTypeName name="java.awt.event.WindowListener"/>
-    <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.xpath.internal.jaxp.JAXPPrefixResolver"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicEditorPaneUI"/>
@@ -38,7 +31,6 @@
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="com.sun.java.swing.plaf.motif.MotifEditorPaneUI"/>
-    <fullyQualifiedTypeName name="base.comp.BaseFrame"/>
     <fullyQualifiedTypeName name="frames.BookListFrame"/>
     <fullyQualifiedTypeName name="javax.swing.border.MatteBorder"/>
     <fullyQualifiedTypeName name="java.lang.invoke.VolatileCallSite"/>
@@ -52,12 +44,20 @@
     <fullyQualifiedTypeName name="java.awt.print.Book"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="base.comp.ImageLabel"/>
-    <fullyQualifiedTypeName name="base.comp.BaseLabel"/>
     <fullyQualifiedTypeName name="base.comp.NullPanel"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
-    <fullyQualifiedTypeName name="jdbc.DbManager"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
     <fullyQualifiedTypeName name="frames.BookInfo"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="testProject.MainClass"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="base.comp.BaseFrame"/>
+    <fullyQualifiedTypeName name="base.comp.BaseLabel"/>
+    <fullyQualifiedTypeName name="javax.swing.JRadioButton"/>
+    <fullyQualifiedTypeName name="jdbc.DbManager"/>
     <fullyQualifiedTypeName name="model.model"/>
 </qualifiedTypeNameHistroy>
