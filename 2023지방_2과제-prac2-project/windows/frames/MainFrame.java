@@ -84,6 +84,10 @@ public class MainFrame extends BaseFrame{
 		jbSignUp.addActionListener(e -> {
 			new SignUpFrame(this);
 		});
+		jbBookList.addActionListener(e -> {
+			new BookListFrame(this);
+		});
+		
 	}
 	
 	private void LogOutState() {
@@ -152,7 +156,7 @@ public class MainFrame extends BaseFrame{
 			
 			jpCenter.jpCenter.add(new ImageLabel(datas.get(i).get(3), icons.get(i), 200, 200).setLine().setTextBottom());
 			
-		}
+	} 
 		super.refresh();
 		
 	}

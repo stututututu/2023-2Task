@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="1"/>
+	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="2"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-12"/>
 	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Program Files (x86)\MySQL\Connector J 8.0"/>
 	<item key="SortMembers.sort_all" value="false"/>
@@ -29,7 +29,7 @@
 		<item key="contextSelector.size.y" value="221"/>
 	</section>
 	<section name="quick_assist_proposal_size">
-		<item key="size.x" value="428"/>
+		<item key="size.x" value="427"/>
 		<item key="size.y" value="253"/>
 	</section>
 	<section name="BuildPathsPropertyPage">
